@@ -1,3 +1,5 @@
 manufacture/
 manufacture/*
 *.STL
+2nd/
+*.DXF
