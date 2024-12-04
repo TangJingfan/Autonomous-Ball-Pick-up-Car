@@ -1,5 +1,7 @@
 manufacture/
 manufacture/*
 *.STL
-2nd/
+structure/2nd/
 *.DXF
+docs/
+.vscode/
