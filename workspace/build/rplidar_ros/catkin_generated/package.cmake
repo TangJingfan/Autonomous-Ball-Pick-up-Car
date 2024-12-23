@@ -1,5 +1,5 @@
 set(_CATKIN_CURRENT_PACKAGE "rplidar_ros")
-set(rplidar_ros_VERSION "2.1.5")
+set(rplidar_ros_VERSION "1.9.0")
 set(rplidar_ros_MAINTAINER "Slamtec ROS Maintainer <ros@slamtec.com>")
 set(rplidar_ros_PACKAGE_FORMAT "1")
 set(rplidar_ros_BUILD_DEPENDS "roscpp" "rosconsole" "sensor_msgs" "std_srvs")

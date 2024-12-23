@@ -456,7 +456,7 @@ rplidar_ros/preinstall:
 rplidar_ros/CMakeFiles/rplidarNodeClient.dir/all:
 	$(MAKE) -f rplidar_ros/CMakeFiles/rplidarNodeClient.dir/build.make rplidar_ros/CMakeFiles/rplidarNodeClient.dir/depend
 	$(MAKE) -f rplidar_ros/CMakeFiles/rplidarNodeClient.dir/build.make rplidar_ros/CMakeFiles/rplidarNodeClient.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nano/Autonomous-Ball-Pick-up-Car/workspace/build/CMakeFiles --progress-num=30,31 "Built target rplidarNodeClient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nano/Autonomous-Ball-Pick-up-Car/workspace/build/CMakeFiles --progress-num=19,20 "Built target rplidarNodeClient"
 .PHONY : rplidar_ros/CMakeFiles/rplidarNodeClient.dir/all
 
 # Include target in all.
@@ -493,7 +493,7 @@ clean: rplidar_ros/CMakeFiles/rplidarNodeClient.dir/clean
 rplidar_ros/CMakeFiles/rplidarNode.dir/all:
 	$(MAKE) -f rplidar_ros/CMakeFiles/rplidarNode.dir/build.make rplidar_ros/CMakeFiles/rplidarNode.dir/depend
 	$(MAKE) -f rplidar_ros/CMakeFiles/rplidarNode.dir/build.make rplidar_ros/CMakeFiles/rplidarNode.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nano/Autonomous-Ball-Pick-up-Car/workspace/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29 "Built target rplidarNode"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nano/Autonomous-Ball-Pick-up-Car/workspace/build/CMakeFiles --progress-num=12,13,14,15,16,17,18 "Built target rplidarNode"
 .PHONY : rplidar_ros/CMakeFiles/rplidarNode.dir/all
 
 # Include target in all.
@@ -503,7 +503,7 @@ all: rplidar_ros/CMakeFiles/rplidarNode.dir/all
 
 # Build rule for subdir invocation for target.
 rplidar_ros/CMakeFiles/rplidarNode.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nano/Autonomous-Ball-Pick-up-Car/workspace/build/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nano/Autonomous-Ball-Pick-up-Car/workspace/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 rplidar_ros/CMakeFiles/rplidarNode.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nano/Autonomous-Ball-Pick-up-Car/workspace/build/CMakeFiles 0
 .PHONY : rplidar_ros/CMakeFiles/rplidarNode.dir/rule
