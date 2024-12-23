@@ -1,0 +1,2 @@
+rplidar_ros
+-DCATKIN_DEVEL_PREFIX=/home/nano/Autonomous-Ball-Pick-up-Car/workspace/devel -DCMAKE_INSTALL_PREFIX=/home/nano/Autonomous-Ball-Pick-up-Car/workspace/install -G Unix Makefiles
