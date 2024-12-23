@@ -455,12 +455,12 @@ hal/util.h
 /home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/rplidar_ros/src/node.cpp
 ros/ros.h
 /home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/rplidar_ros/src/ros/ros.h
+rplidar.h
+/home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/rplidar_ros/src/rplidar.h
 sensor_msgs/LaserScan.h
 /home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/rplidar_ros/src/sensor_msgs/LaserScan.h
 std_srvs/Empty.h
 /home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/rplidar_ros/src/std_srvs/Empty.h
-rplidar.h
-/home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/rplidar_ros/src/rplidar.h
 
 /opt/ros/melodic/include/ros/advertise_options.h
 ros/forwards.h
