@@ -1,3 +1,6 @@
 [submodule "workspace/src/rplidar_ros"]
 	path = workspace/src/rplidar_ros
 	url = git@github.com:TangJingfan/rplidar_ros.git
+[submodule "workspace/src/ros_arduino_bridge"]
+	path = workspace/src/ros_arduino_bridge
+	url = git@github.com:TangJingfan/ros_arduino_bridge.git
