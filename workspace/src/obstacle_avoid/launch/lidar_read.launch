@@ -1,6 +1,0 @@
-<launch>
-  <!-- 启动 obstacle_avoidance 节点 -->
-  <node pkg="obstacle_avoid" type="obstacle_avoidance.py" name="obstacle_avoidance" output="screen">
-    <param name="use_sim_time" value="false" />
-  </node>
-</launch>
