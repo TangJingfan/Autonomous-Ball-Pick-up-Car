@@ -15,7 +15,8 @@ void laserCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
 
   // send info to arduino
   std::stringstream ss;
-  ss << "distance:" << min_distance << "\n";
+  ss << "w" << "\n";
+  // ss << "distance:" << min_distance << "\n";
   std::string command = ss.str();
 
   try {
