@@ -15,7 +15,8 @@ void laserCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
 
   // send info to arduino
   std::stringstream ss;
-  ss << "w" << "\n";
+  ss << "w"
+     << "\n";
   // ss << "distance:" << min_distance << "\n";
   std::string command = ss.str();
 
@@ -34,7 +35,7 @@ int main(int argc, char **argv) {
   // init serial
   try {
     ser.setPort("/dev/ttyUSB0"); // modify it to real serial
-    ser.setBaudrate(115200);
+    ser.setBaudrate(9600);
     serial::Timeout to = serial::Timeout::simpleTimeout(1000);
     ser.setTimeout(to);
     ser.open();
