@@ -3,6 +3,7 @@ project(laser_to_arduino)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  rosconsole
   sensor_msgs
 )
 

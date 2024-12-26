@@ -3,12 +3,14 @@
   <version>0.1.0</version>
   <description>LaserScan to Arduino communication package</description>
 
-  <maintainer email="your_email@example.com">Your Name</maintainer>
+  <maintainer email="tang_jingfan@sjtu.edu.cn">Your Name</maintainer>
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>sensor_msgs</build_depend>
+  <exec_depend>serial</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>serial</exec_depend>
 
   <build_export_depend>roscpp</build_export_depend>
