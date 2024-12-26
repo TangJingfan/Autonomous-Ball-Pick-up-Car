@@ -3,7 +3,7 @@
 MecanumDriver mecanum(9, 8, 12, 13, 11, 10, 46, 21);
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   mecanum.begin();
 }
 
