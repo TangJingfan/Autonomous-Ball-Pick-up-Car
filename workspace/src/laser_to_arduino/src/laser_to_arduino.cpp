@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 
   // init serial
   try {
-    ser.setPort("/dev/ttyUSB1"); // modify it to real serial
+    ser.setPort("/dev/arduino"); // modify it to real serial
     ser.setBaudrate(115200);
     serial::Timeout to = serial::Timeout::simpleTimeout(1000);
     ser.setTimeout(to);
