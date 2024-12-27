@@ -1,31 +1,37 @@
-#include "src/MecanumDriver.h"
+#include "MecanumDriver.h"
 
 MecanumDriver mecanum(9, 8, 12, 13, 11, 10, 46, 21);
 
-void setup() {
-  Serial.begin(115200);
-  Serial.println("Starting setup...");
-  mecanum.begin();
-  Serial.println("Mecanum initialized");
+int speed[4] = {0, 0, 0, 0};
+String command;
+
+void setup()
+{
+    mecanum.begin();
+    Serial.begin(115200);
 }
 
-void loop() {
-  if (Serial.available() > 0) {
-    String command = Serial.readString();  // 读取完整输入字符串
-    command.trim();  // 去掉多余的空格和换行符
-    Serial.print("Received command: ");
-    Serial.println(command);
-
-    if (command == "w") {
-      mecanum.setDutyCycle(100, 100, 100, 100);
-      Serial.println("Motors running forward");
-    } else {
-      mecanum.setDutyCycle(0, 0, 0, 0);
-      Serial.println("Motors stopped");
+void loop()
+{
+    while (Serial.available() > 0)
+    {
+        char temp = char(Serial.read());
+        if ((temp >= '0' && temp <= '9') || (temp >= 'a' && temp <= 'z'))
+        {
+            command += temp;
+        }
     }
-  } else {
-    mecanum.setDutyCycle(0, 0, 0, 0);
-  }
-  delay(100);
-}
 
+    if (command.length() > 0)
+    {
+        int begin = message.indexOf('<');
+        int end = message.indexOf('>') + 1;
+        if (begin != -1 && end != -1 && begin < end)
+        {
+            sscanf(message.substring(begin, end).c_str(), "<%d,%d,%d,%d>", &speed[0], &speed[1], &speed[2], &speed[3]);
+        }
+    }
+
+    mecanum.setDutyCycle(speed[0], speed[1], speed[2], speed[3]);
+    delay(20);
+}
