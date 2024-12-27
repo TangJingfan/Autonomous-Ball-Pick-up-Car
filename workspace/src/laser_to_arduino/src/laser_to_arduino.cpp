@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
   ros::Subscriber sub = nh.subscribe("/scan", 7, laserCallback);
 
   // keep running
-  // ros::spin();
+  ros::spin();
 
   ser.close();
   return 0;
