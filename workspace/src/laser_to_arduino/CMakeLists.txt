@@ -1,28 +1,28 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(laser_to_arduino)
 
-# 使用 C++11 标准
+# use c++11 standard to compile
 add_compile_options(-std=c++11)
 
-# 查找 catkin 所需组件
+# find necessary component
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
   serial
 )
 
-# 声明 catkin 包
+# declare catkin package
 catkin_package()
 
-# 包含头文件目录
+# include header
 include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-# 添加可执行文件
+# add executable
 add_executable(${PROJECT_NAME} src/laser_to_arduino.cpp)
 
-# 链接库
+# link libraries
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )

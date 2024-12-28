@@ -13,14 +13,15 @@ void laserCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
   float min_distance =
       *std::min_element(msg->ranges.begin(), msg->ranges.end());
 
-  // send info to arduino
-  std::stringstream ss;
-  ss << "w";
-  // ss << "distance:" << min_distance << "\n";
-  std::string command = ss.str();
+  // std::stringstream ss;
+  // ss << "w";
+  // // ss << "distance:" << min_distance << "\n";
+  // std::string command = ss.str();
 
   try {
+    // send info to arduino
     ser.write("<100,100,100,100>");
+    // flush output buffer
     ser.flushOutput();
     std::string received_msgs = ser.read();
     // ROS_INFO("Sent to Arduino: %s", received_msgs.c_str());
@@ -32,12 +33,15 @@ void laserCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
 }
 
 int main(int argc, char **argv) {
+  // init node
   ros::init(argc, argv, "laser_to_arduino");
+
+  // init a node handle
   ros::NodeHandle nh;
 
-  // init serial
   try {
-    ser.setPort("/dev/arduino"); // modify it to real serial
+    // init serial
+    ser.setPort("/dev/arduino");
     ser.setBaudrate(115200);
     serial::Timeout to = serial::Timeout::simpleTimeout(1000);
     ser.setTimeout(to);
@@ -53,10 +57,10 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // subscribe
+  // subscribe topic "/scan"
   ros::Subscriber sub = nh.subscribe("/scan", 7, laserCallback);
 
-  // keep running
+  // keep the node running
   ros::spin();
 
   ser.close();
