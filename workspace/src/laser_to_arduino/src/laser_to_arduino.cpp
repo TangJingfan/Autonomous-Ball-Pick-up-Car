@@ -3,20 +3,25 @@
 #include <sensor_msgs/LaserScan.h>
 #include <serial/serial.h>
 #include <sstream>
+#include <vector>
 
 // serial object
 serial::Serial ser;
 
 // deal with LaserScan data
 void laserCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
-  // get min distance
-  float min_distance =
-      *std::min_element(msg->ranges.begin(), msg->ranges.end());
-
-  // std::stringstream ss;
-  // ss << "w";
-  // // ss << "distance:" << min_distance << "\n";
-  // std::string command = ss.str();
+  // read from laser and set obstacle
+  std::vector<std::pair<float, float>> obstacles;
+  for (size_t i = 0; i < msg->ranges.size(); i++) {
+    float distance = msg->ranges[i];
+    float angle = msg->angle_min + i * msg->angle_increment;
+    // select useful data and set location in point cloud
+    if (distance >= msg->range_min && distance <= msg->range_max) {
+      float x = distance * cos(angle);
+      float y = distance * sin(angle);
+      obstacles.emplace_back(x, y);
+    }
+  }
 
   try {
     // send info to arduino
