@@ -17,10 +17,13 @@ catkin_package()
 # include header
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  src/include
 )
 
 # add executable
-add_executable(${PROJECT_NAME} src/laser_to_arduino.cpp)
+add_executable(${PROJECT_NAME} 
+src/laser_to_arduino.cpp 
+src/exploration_rtt.cpp)
 
 # link libraries
 target_link_libraries(${PROJECT_NAME}
