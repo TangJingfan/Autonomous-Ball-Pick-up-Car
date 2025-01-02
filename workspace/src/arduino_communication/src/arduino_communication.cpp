@@ -16,9 +16,9 @@ void laser_call_back(const sensor_msgs::LaserScan::ConstPtr &msg) {
     // flush output buffer
     ser.flushOutput();
     ROS_INFO("Sent!");
-    // std::string received_msgs = ser.read();
+    std::string received_msgs = ser.read();
     // ROS_INFO("Sent to Arduino: %s", received_msgs.c_str());
-    // std::cout << received_msgs << std::endl;
+    std::cout << received_msgs << std::endl;
     // ros::Duration(0.1).sleep(); // Sleep for 100 milliseconds
   } catch (serial::IOException &e) {
     ROS_ERROR("Unable to send data to Arduino.");
