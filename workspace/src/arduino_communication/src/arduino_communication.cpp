@@ -26,7 +26,7 @@ void laser_call_back(const sensor_msgs::LaserScan::ConstPtr &msg) {
 
 int main(int argc, char **argv) {
   // init node
-  ros::init(argc, argv, "laser_to_arduino");
+  ros::init(argc, argv, "arduino_communication");
 
   // init a node handle
   ros::NodeHandle nh;
