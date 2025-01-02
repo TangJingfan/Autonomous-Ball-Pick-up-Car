@@ -31,7 +31,7 @@ void loop() {
     if (begin != -1 && end != -1 && begin < end) {
 
       // assign value to speed array
-      sscanf(message.substring(begin, end).c_str(), "<%d,%d,%d,%d>", &speed[0],
+      sscanf(command.substring(begin, end).c_str(), "<%d,%d,%d,%d>", &speed[0],
              &speed[1], &speed[2], &speed[3]);
     }
   }
