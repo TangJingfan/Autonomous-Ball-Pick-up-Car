@@ -24,7 +24,9 @@ void laserCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
     }
   }
 
-  try {
+  update_grid_map
+
+      try {
     // send info to arduino
     ser.write("<100,100,100,100>");
     // flush output buffer

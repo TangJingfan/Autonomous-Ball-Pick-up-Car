@@ -10,7 +10,7 @@ struct point {
 const int map_size_x = 100;
 const int map_size_y = 100;
 // resolution 0.1 meter in real world
-const double resolution = 0.1;
+const float resolution = 0.1;
 // step size
 int step_size = 5;
 // max iteration times
@@ -40,3 +40,7 @@ point start = {50, 50};
 
 std::vector<point> rrt_explore(std::vector<std::vector<int>> &grid_map,
                                point start, int max_iter, int step_size);
+
+void update_grid_map(const std::vector<std::pair<float, float>> &obstacles,
+                     std::vector<std::vector<int>> &grid_map, float resolution,
+                     float origin_x, float origin_y);

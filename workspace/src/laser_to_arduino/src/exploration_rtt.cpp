@@ -68,3 +68,18 @@ bool is_near_unknown(const std::vector<std::vector<int>> &grid_map, int x,
   }
   return false;
 }
+
+void update_grid_map(const std::vector<std::pair<float, float>> &obstacles,
+                     std::vector<std::vector<int>> &grid_map, float resolution,
+                     float origin_x, float origin_y, point origin_point) {
+  for (const auto &obs : obstacles) {
+    int grid_x = static_cast<int>((obs.first - origin_x) / resolution) +
+                 origin_point.row_x;
+    int grid_y = static_cast<int>((obs.second - origin_y) / resolution) +
+                 origin_point.col_y;
+    if (grid_x >= 0 && grid_x < grid_map.size() && grid_y >= 0 &&
+        grid_y < grid_map[0].size()) {
+      grid_map[grid_x][grid_y] = 1; // mark as obstacle
+    }
+  }
+}
