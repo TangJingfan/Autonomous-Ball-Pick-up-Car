@@ -1,5 +1,5 @@
 <launch>
-  <node name="laser_to_arduino" pkg="laser_to_arduino" type="laser_to_arduino" output="screen">
+  <node name="arduino_communication" pkg="laser_to_arduino" type="arduino_communication" output="screen">
     <param name="serial_port" value="/dev/arduino" />
     <param name="baudrate" value="115200" />
   </node>

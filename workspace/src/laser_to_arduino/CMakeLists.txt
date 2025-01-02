@@ -21,9 +21,7 @@ include_directories(
 )
 
 # add executable
-add_executable(${PROJECT_NAME} 
-src/laser_to_arduino.cpp 
-src/exploration_rtt.cpp)
+add_executable(${PROJECT_NAME} src/arduino_communication.cpp )
 
 # link libraries
 target_link_libraries(${PROJECT_NAME}

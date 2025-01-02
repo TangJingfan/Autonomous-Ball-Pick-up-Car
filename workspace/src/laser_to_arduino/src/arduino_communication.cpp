@@ -10,23 +10,8 @@
 serial::Serial ser;
 
 // deal with LaserScan data
-void laserCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
-  // read from laser and set obstacle
-  std::vector<std::pair<float, float>> obstacles;
-  for (size_t i = 0; i < msg->ranges.size(); i++) {
-    float distance = msg->ranges[i];
-    float angle = msg->angle_min + i * msg->angle_increment;
-    // select useful data and set location in point cloud
-    if (distance >= msg->range_min && distance <= msg->range_max) {
-      float x = distance * cos(angle);
-      float y = distance * sin(angle);
-      obstacles.emplace_back(x, y);
-    }
-  }
-
-  update_grid_map
-
-      try {
+void laser_call_back(const sensor_msgs::LaserScan::ConstPtr &msg) {
+  try {
     // send info to arduino
     ser.write("<100,100,100,100>");
     // flush output buffer
@@ -66,7 +51,7 @@ int main(int argc, char **argv) {
   }
 
   // subscribe topic "/scan"
-  ros::Subscriber sub = nh.subscribe("/scan", 7, laserCallback);
+  ros::Subscriber sub = nh.subscribe("/scan", 7, laser_call_back);
 
   // keep the node running
   ros::spin();
