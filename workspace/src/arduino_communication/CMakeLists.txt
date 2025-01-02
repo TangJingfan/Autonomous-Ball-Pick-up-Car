@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(laser_to_arduino)
+project(arduino_communication)
 
 # use c++11 standard to compile
 add_compile_options(-std=c++11)
