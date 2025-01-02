@@ -8,11 +8,55 @@
 // serial object
 serial::Serial ser;
 
+std::string
+get_next_step_velocity(const sensor_msgs::LaserScan::ConstPtr &msg) {
+
+  bool left_empty = true;
+  bool forward_empty = true;
+  bool right_empty = true;
+
+  // read from laser and set obstacle
+  std::vector<std::pair<float, float>> obstacles;
+  for (size_t i = 0; i < msg->ranges.size(); i++) {
+    float distance = msg->ranges[i];
+    float angle = msg->angle_min + i * msg->angle_increment;
+
+    if (angle < 1.57 && angle > 0.77 && distance < 0.2 &&
+        distance >= msg->range_min) {
+      right_empty = false;
+    }
+    if (angle < 0.77 && angle > -0.77 && distance < 0.2 &&
+        distance >= msg->range_min) {
+      forward_empty = false;
+    }
+    if (angle > -1.57 && angle < -0.77 && distance < 0.2 &&
+        distance >= msg->range_min) {
+      left_empty = false;
+    }
+  }
+
+  if (forward_empty) {
+    return "<100,100,100,100>";
+  } else {
+    if (right_empty) {
+      return "<100,-100,-100,100>";
+    } else if (!right_empty && left_empty) {
+      return "<-100,100,100,-100>";
+    } else {
+      return "<0,0,0,0>";
+    }
+  }
+}
+
 // deal with LaserScan data
 void laser_call_back(const sensor_msgs::LaserScan::ConstPtr &msg) {
+
+  std::string chassis_command = get_next_step_velocity(msg);
+
   try {
     // send info to arduino
-    ser.write("<100,100,100,100>");
+    ser.write(chassis_command);
+    // ser.write("<100,100,100,100>");
     // flush output buffer
     ser.flushOutput();
     ROS_INFO("Sent!");
