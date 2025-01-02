@@ -17,7 +17,6 @@ catkin_package()
 # include header
 include_directories(
   ${catkin_INCLUDE_DIRS}
-  src/include
 )
 
 # add executable
