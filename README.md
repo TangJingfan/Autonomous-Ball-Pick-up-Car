@@ -13,13 +13,12 @@ All structural files are stored in the `structure` directory. The naming convent
 
 ## Laser SLAM
 
-Follow the steps below to configure and run Laser SLAM:
+Hector SLAM is used in this project. Follow the steps below to configure and run Laser SLAM:
 
 ```bash
 cd ~/Autonomous-Ball-Pick-up-Car/workspace
 catkin_make
 source /opt/ros/melodic/setup.bash
 source devel/setup.bash
-cd ./src/rplidar_ros/launch
 roslaunch rplidar_ros rplidar_slam.launch
 ```
