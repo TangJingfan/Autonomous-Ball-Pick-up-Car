@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>laser_to_arduino</name>
+  <name>arduino_communication</name>
   <version>0.0.0</version>
   <description>The laser_to_arduino_node package</description>
 
