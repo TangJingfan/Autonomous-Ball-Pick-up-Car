@@ -38,12 +38,12 @@ get_next_step_velocity(const sensor_msgs::LaserScan::ConstPtr &msg) {
   // std::cout << forward_empty << left_empty << right_empty << std::endl;
 
   if (forward_empty) {
-    return "<100,100,100,100>";
+    return "<50,50,50,50>";
   } else {
     if (right_empty) {
-      return "<50,-50,-50,50>";
+      return "<50,-50,50,-50>";
     } else if (!right_empty && left_empty) {
-      return "<-25,25,25,-25>";
+      return "<-50,50,-50,50>";
     } else {
       return "<0,0,0,0>";
     }
