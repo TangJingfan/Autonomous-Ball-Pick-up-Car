@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(arduino_communication)
+project(nav_point_to_point)
 
 # use c++11 standard to compile
 add_compile_options(-std=c++11)
@@ -20,7 +20,7 @@ include_directories(
 )
 
 # add executable
-add_executable(${PROJECT_NAME} src/arduino_communication.cpp )
+add_executable(${PROJECT_NAME} src/nav_point_to_point.cpp )
 
 # link libraries
 target_link_libraries(${PROJECT_NAME}
