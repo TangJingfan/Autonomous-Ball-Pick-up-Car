@@ -16,7 +16,7 @@
 Cartographer
 ============
 
-|build| |docs| |license|
+|build-jammy| |build-focal| |build-bionic| |build-bullseye| |build-buster| |docs| |license|
 
 Purpose
 =======
@@ -29,6 +29,23 @@ configurations.
 
 .. _Cartographer: https://github.com/cartographer-project/cartographer
 .. _SLAM: https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping
+
+A Note for ROS Users
+====================
+
+**Cartographer is no longer actively maintained.**
+On rare occasions critical pull requests may be merged, but no new development is currently taking place, including issue response.
+If you are installing Cartographer in ROS 1 / ROS 2 using a binary package that package is a fork of this repository.
+The ROS fork of Cartographer is only maintained in a limited capacity.
+No new development takes place on this fork, but pull requests may be merged at the maintainers' discretion.    
+
+The ROS fork of Cartographer, and the ROS wrapper library, can be found at these locations:
+
+- `Cartographer Fork <https://github.com/ros2/cartographer>`_
+- `Cartographer ROS  <https://github.com/ros2/cartographer_ros>`_
+
+Additional discussion can be found in `this ROS Discourse thread<https://discourse.ros.org/t/rolling-and-soon-humble-release-of-both-cartographer-and-cartographer-ros-v2-and-call-for-testing/25137>`_.  
+
 
 Getting started
 ===============
@@ -83,10 +100,26 @@ Slides of these Cartographer Open House meetings are listed below.
 - June 22, 2017: `Slides <https://storage.googleapis.com/cartographer-public-data/cartographer-open-house/170622/sildes.pdf>`_
 - June 8, 2017: `Slides <https://storage.googleapis.com/cartographer-public-data/cartographer-open-house/170608/slides.pdf>`_
 
-.. |build| image:: https://travis-ci.org/cartographer-project/cartographer.svg?branch=master
-    :alt: Build Status
+.. |build-jammy| image:: https://github.com/cartographer-project/cartographer/actions/workflows/ci-jammy.yaml/badge.svg
+    :alt: Ubuntu 22.04 Build Status
     :scale: 100%
-    :target: https://travis-ci.org/cartographer-project/cartographer
+    :target: https://github.com/cartographer-project/cartographer/actions/workflows/ci-jammy.yaml
+.. |build-focal| image:: https://github.com/cartographer-project/cartographer/actions/workflows/ci-focal.yaml/badge.svg
+    :alt: Ubuntu 20.04 Build Status
+    :scale: 100%
+    :target: https://github.com/cartographer-project/cartographer/actions/workflows/ci-focal.yaml
+.. |build-bionic| image:: https://github.com/cartographer-project/cartographer/actions/workflows/ci-bionic.yaml/badge.svg
+    :alt: Ubuntu 18.04 Build Status
+    :scale: 100%
+    :target: https://github.com/cartographer-project/cartographer/actions/workflows/ci-bionic.yaml
+.. |build-bullseye| image:: https://github.com/cartographer-project/cartographer/actions/workflows/ci-bullseye.yaml/badge.svg
+    :alt: Debian Bullseye Build Status
+    :scale: 100%
+    :target: https://github.com/cartographer-project/cartographer/actions/workflows/ci-bullseye.yaml
+.. |build-buster| image:: https://github.com/cartographer-project/cartographer/actions/workflows/ci-buster.yaml/badge.svg
+    :alt: Debian Buster Build Status
+    :scale: 100%
+    :target: https://github.com/cartographer-project/cartographer/actions/workflows/ci-buster.yaml
 .. |docs| image:: https://readthedocs.org/projects/google-cartographer/badge/?version=latest
     :alt: Documentation Status
     :scale: 100%
