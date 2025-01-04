@@ -63,7 +63,7 @@ void laser_call_back(const sensor_msgs::LaserScan::ConstPtr &msg) {
     // ser.write("<100,100,100,100>");
     // flush output buffer
     ser.flushOutput();
-    std::string received_msgs = ser.read();
+    std::string received_msgs = ser.readline();
     // ROS_INFO(received_msgs);
     // ROS_INFO("Sent to Arduino: %s", received_msgs.c_str());
     std::cout << received_msgs << std::endl;
