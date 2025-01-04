@@ -23,7 +23,7 @@ get_next_step_velocity(const sensor_msgs::LaserScan::ConstPtr &msg) {
 
     if (angle < 1.57 && angle > 0.77 && distance < 0.2 &&
         distance >= msg->range_min) {
-      right_empty = false;
+      left_empty = false;
     }
     if (angle < 0.77 && angle > -0.77 && distance < 0.2 &&
         distance >= msg->range_min) {
@@ -31,14 +31,14 @@ get_next_step_velocity(const sensor_msgs::LaserScan::ConstPtr &msg) {
     }
     if (angle > -1.57 && angle < -0.77 && distance < 0.2 &&
         distance >= msg->range_min) {
-      left_empty = false;
+      right_empty = false;
     }
   }
 
-  std::cout << forward_empty << left_empty << right_empty << std::endl;
+  // std::cout << forward_empty << left_empty << right_empty << std::endl;
 
   if (forward_empty) {
-    return "<100,100,100,100>";
+    return "<-100,100,-100,100>";
   } else {
     if (right_empty) {
       return "<100,-100,-100,100>";
