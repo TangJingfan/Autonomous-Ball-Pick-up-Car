@@ -36,7 +36,7 @@ void loop() {
     }
   }
 
-  Serial.print(command);
+  Serial.println(command);
 
   // make mecanum car run
   mecanum.setDutyCycle(speed[0], speed[1], speed[2], speed[3]);
