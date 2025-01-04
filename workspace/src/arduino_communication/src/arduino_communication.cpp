@@ -58,6 +58,8 @@ void laser_call_back(const sensor_msgs::LaserScan::ConstPtr &msg) {
   try {
     // send info to arduino
     ser.write(chassis_command);
+
+    std::cout << chassis_command << std::endl;
     // ser.write("<100,100,100,100>");
     // flush output buffer
     ser.flushOutput();
