@@ -12,3 +12,7 @@ build/*
 devel/
 devel/*
 .catkin_workspace
+build_isolated/
+build_isolated/*
+devel_isolated/
+devel_isolated/*
