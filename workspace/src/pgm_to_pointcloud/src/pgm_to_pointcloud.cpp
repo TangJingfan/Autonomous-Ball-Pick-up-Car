@@ -27,8 +27,10 @@ std::vector<std::array<float, 3>>
 pgmToPointCloud(const std::vector<std::vector<uint8_t>> &pgm_image,
                 const YAML::Node &yaml_data) {
   double resolution = yaml_data["resolution"].as<double>(0.05);
+  std::vector<double> default_origin = {0.0, 0.0, 0.0};
   std::vector<double> origin =
-      yaml_data["origin"].as<std::vector<double>>({0.0, 0.0, 0.0});
+      yaml_data["origin"] ? yaml_data["origin"].as<std::vector<double>>()
+                          : default_origin;
 
   std::vector<std::array<float, 3>> points;
   int height = pgm_image.size();
