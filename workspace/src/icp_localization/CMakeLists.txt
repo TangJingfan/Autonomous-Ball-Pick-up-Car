@@ -20,7 +20,6 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 find_package(Eigen3 REQUIRED)
-find_package(nanoflann REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -124,7 +123,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
-  ${CMAKE_SOURCE_DIR}/nanoflann
+  ${CMAKE_SOURCE_DIR}/nanoflann/include()
 )
 
 ## Declare a C++ library
