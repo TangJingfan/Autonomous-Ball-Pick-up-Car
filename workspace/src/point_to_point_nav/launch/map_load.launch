@@ -1,4 +1,4 @@
 <launch>
   <arg name="map" default="map.yaml"/>
-  <node pkg="map_server" name="map_server" type="map_server" args="$(find point_to_point)/map_info/$(arg map)"/>
+  <node pkg="map_server" name="map_server" type="map_server" args="$(find point_to_point_nav)/map_info/$(arg map)"/>
 </launch>
