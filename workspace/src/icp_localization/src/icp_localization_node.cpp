@@ -48,7 +48,7 @@ public:
     // publish /robot_pose; send out info related to robot pose
     pose_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("/robot_pose", 10);
     // init tf broadcaster
-    tf_broadcaster_ = new tf::TransformBroadcaster();
+    tf::TransformBroadcaster tf_broadcaster_;
   }
 
 private:
@@ -154,7 +154,7 @@ private:
         nanoflann::KNNResultSet<double> resultSet(1);
         resultSet.init(&ret_index, &out_dist_sqr);
         kd_tree_->findNeighbors(resultSet, &query_pt[0],
-                                nanoflann::SearchParams(10));
+                                nanoflann::SearchParameters(10));
         target_matched.emplace_back(map_cloud_.points[ret_index]);
       }
 
