@@ -162,7 +162,7 @@ private:
     Eigen::Matrix3d total_transform = Eigen::Matrix3d::Identity();
 
     // set icp iteration times
-    int max_iterations = 20;
+    int max_iterations = 30;
     double tolerance = 1e-4;
 
     std::vector<Point2D> source_transformed = source;
