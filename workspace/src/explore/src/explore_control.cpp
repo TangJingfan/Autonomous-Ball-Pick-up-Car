@@ -26,11 +26,11 @@ get_next_step_velocity(const sensor_msgs::LaserScan::ConstPtr &msg) {
         distance >= msg->range_min) {
       left_empty = false;
     }
-    if (angle < 0.52 && angle > -0.52 && distance * cos(angle) < 0.25 &&
+    if (angle < 0.52 && angle > -0.52 && distance * cos(angle) < 0.2 &&
         distance >= msg->range_min) {
       forward_empty = false;
     }
-    if (angle > -1.57 && angle < -0.75 && -distance * sin(angle) < 0.25 &&
+    if (angle > -1.57 && angle < -0.75 && -distance * sin(angle) < 0.2 &&
         distance >= msg->range_min) {
       right_empty = false;
     }
