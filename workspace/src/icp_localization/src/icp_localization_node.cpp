@@ -4,8 +4,12 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <nanoflann.hpp>
 #include <nav_msgs/OccupancyGrid.h>
+#include <pcl/point_cloud.h>
+#include <pcl/point_types.h>
+#include <pcl_conversions/pcl_conversions.h>
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
+#include <sensor_msgs/PointCloud2.h>
 #include <string>
 #include <tf/transform_broadcaster.h>
 #include <vector>
@@ -49,6 +53,8 @@ public:
     pose_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("/robot_pose", 10);
     // init tf broadcaster
     tf::TransformBroadcaster tf_broadcaster_;
+    map_cloud_pub_ =
+        nh_.advertise<sensor_msgs::PointCloud2>("/map_point_cloud", 1);
   }
 
 private:
@@ -57,6 +63,7 @@ private:
   ros::Subscriber scan_sub_;
   ros::Publisher pose_pub_;
   tf::TransformBroadcaster tf_broadcaster_;
+  ros::Publisher map_cloud_pub_;
 
   PointCloud map_cloud_;
   my_kd_tree_t *kd_tree_;
@@ -106,6 +113,10 @@ private:
     double origin_x = map.info.origin.position.x;
     double origin_y = map.info.origin.position.y;
 
+    // PCL point cloud
+    pcl::PointCloud<pcl::PointXYZ>::Ptr pcl_cloud(
+        new pcl::PointCloud<pcl::PointXYZ>());
+
     for (unsigned int y = 0; y < map.info.height; ++y) {
       for (unsigned int x = 0; x < map.info.width; ++x) {
         int index = x + y * map.info.width;
@@ -114,9 +125,21 @@ private:
           double map_x = origin_x + x * resolution;
           double map_y = origin_y + y * resolution;
           cloud.points.emplace_back(Point2D{map_x, map_y});
+
+          // Add to PCL cloud
+          pcl_cloud->points.emplace_back(pcl::PointXYZ(map_x, map_y, 0.0));
         }
       }
     }
+
+    // Convert to sensor_msgs::PointCloud2
+    sensor_msgs::PointCloud2 cloud_msg;
+    pcl::toROSMsg(*pcl_cloud, cloud_msg);
+    cloud_msg.header.frame_id = "map";
+    cloud_msg.header.stamp = ros::Time::now();
+
+    // Publish point cloud
+    map_cloud_pub_.publish(cloud_msg);
   }
 
   std::vector<Point2D>
