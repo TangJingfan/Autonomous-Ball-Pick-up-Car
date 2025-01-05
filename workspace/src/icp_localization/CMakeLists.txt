@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(icp_localization)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -19,6 +19,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
+find_package(Eigen3 REQUIRED)
+find_package(nanoflann REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -107,10 +109,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES icp_localization
-#  CATKIN_DEPENDS geometry_msgs nav_msgs pcl_conversions pcl_ros roscpp sensor_msgs tf
-#  DEPENDS system_lib
+  CATKIN_DEPENDS roscpp sensor_msgs nav_msgs tf geometry_msgs pcl_ros pcl_conversions
 )
 
 ###########
@@ -119,9 +118,13 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+
+
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${CMAKE_SOURCE_DIR}/nanoflann
 )
 
 ## Declare a C++ library
@@ -138,6 +141,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/icp_localization_node.cpp)
+add_executable(icp_localization_node src/icp_localization_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,9 +154,10 @@ include_directories(
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(icp_localization_node
+  ${catkin_LIBRARIES}
+  Eigen3::Eigen
+)
 
 #############
 ## Install ##
