@@ -80,8 +80,10 @@ int main(int argc, char **argv) {
   ros::NodeHandle nh("~");
 
   std::string pgm_file, yaml_file, frame_id;
-  nh.param("pgm_file", pgm_file, std::string("map.pgm"));
-  nh.param("yaml_file", yaml_file, std::string("map.yaml"));
+  nh.param("pgm_file", pgm_file,
+           std::string("workspace/src/point_to_point_nav/map_info/map.pgm"));
+  nh.param("yaml_file", yaml_file,
+           std::string("workspace/src/point_to_point_nav/map_info/map.yaml"));
   nh.param("frame_id", frame_id, std::string("map"));
 
   try {
