@@ -1,4 +1,4 @@
 <launch>
-    <arg name="filename" value="$(find point_to_point_nav)/map_info/map" />
-    <node name="map_save" pkg="map_server" type="map_saver" args="-f $(arg filename)" />
+    <arg name="filename" default="$(find point_to_point_nav)/map_info/map" />
+    <node pkg="map_server" type="map_saver" name="map_saver" args="-f $(arg filename)" output="screen" />
 </launch>
