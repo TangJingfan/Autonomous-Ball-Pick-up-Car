@@ -1,5 +1,5 @@
 <launch>
-  <node name="arduino_communication" pkg="arduino_communication" type="arduino_communication" output="screen">
+  <node name="explore" pkg="explore" type="explore" output="screen">
     <param name="serial_port" value="/dev/arduino" />
     <param name="baudrate" value="115200" />
   </node>

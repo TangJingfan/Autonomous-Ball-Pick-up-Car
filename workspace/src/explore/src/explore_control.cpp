@@ -69,7 +69,7 @@ void laser_call_back(const sensor_msgs::LaserScan::ConstPtr &msg) {
 
 int main(int argc, char **argv) {
   // init node
-  ros::init(argc, argv, "arduino_communication");
+  ros::init(argc, argv, "explore");
 
   // init a node handle
   ros::NodeHandle nh;
