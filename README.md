@@ -22,3 +22,11 @@ source /opt/ros/melodic/setup.bash
 source devel/setup.bash
 roslaunch rplidar_ros rplidar_slam.launch
 ```
+
+## Active SLAM
+
+To improve mapping efficiency, we implement a simple exploration algorithm. Follow the steps below.
+
+```bash
+roslaunch arduino_communication arduino_communication.launch
+```
