@@ -5,5 +5,5 @@
 
   <node pkg="icp_localization" type="icp_localization_node" name="icp_localization" output="screen" />
 
-  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find hector_slam_launch)/rviz_cfg/mapping_demo.rviz"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find icp_localization)/rviz/localization.rviz"/>
 </launch>
