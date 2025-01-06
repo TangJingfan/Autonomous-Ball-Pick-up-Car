@@ -163,7 +163,7 @@ private:
 
     // set icp iteration times
     int max_iterations = 30;
-    double tolerance = 1e-4;
+    double tolerance = 0.04;
 
     std::vector<Point2D> source_transformed = source;
 
