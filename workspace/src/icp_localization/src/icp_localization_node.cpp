@@ -271,22 +271,10 @@ private:
   }
 
   void updatePose(const Eigen::Matrix3d &transform) {
-    // catch rotation and translation
+    // take out translation and rotation
     pose_x_ = transform(0, 2);
     pose_y_ = transform(1, 2);
-
-    // accumlative rotation angle
-    double new_theta = std::atan2(transform(1, 0), transform(0, 0));
-    pose_theta_ = normalizeAngle(pose_theta_ + new_theta);
-  }
-
-  double normalizeAngle(double angle) {
-    // normalize
-    while (angle > M_PI)
-      angle -= 2 * M_PI;
-    while (angle < -M_PI)
-      angle += 2 * M_PI;
-    return angle;
+    pose_theta_ = std::atan2(transform(1, 0), transform(0, 0));
   }
 
   void publishPose() {
