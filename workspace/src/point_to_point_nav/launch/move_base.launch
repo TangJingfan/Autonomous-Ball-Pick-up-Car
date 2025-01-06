@@ -1,0 +1,4 @@
+<launch>
+   <rosparam file="$(find point_to_point_nav)/paran/costmap_common_param.yaml" command="load"/>
+
+</launch>
