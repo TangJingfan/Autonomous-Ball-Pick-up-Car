@@ -9,6 +9,7 @@
 // serial object
 serial::Serial ser;
 
+// a simple obstacle avoidance algo
 std::string
 get_next_step_velocity(const sensor_msgs::LaserScan::ConstPtr &msg) {
 
