@@ -1,4 +1,5 @@
 <launch>
-   <rosparam file="$(find point_to_point_nav)/paran/costmap_common_param.yaml" command="load"/>
-
+  <rosparam file="$(find point_to_point_nav)/param/costmap_common_param.yaml" command="load"/>
+  
+  <node pkg="move_base" type="move_base" name="move_base" output="screen"/>
 </launch>
