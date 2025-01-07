@@ -33,3 +33,11 @@ sudo chmod 666 /dev/arduino
 roslaunch explore explore.launch
 roslaunch point_to_point_nav map_save.launch
 ```
+
+## Localization
+
+We apply ICP algorithm to localize the robot. Following command will visualize the result. Additionally, you can change the representation in rviz.
+
+```bash
+roslaunch icp_localization icp_localization.launch
+```
