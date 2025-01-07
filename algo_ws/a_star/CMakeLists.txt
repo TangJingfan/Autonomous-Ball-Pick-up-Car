@@ -10,3 +10,7 @@ add_executable(a_star src/a_star.cpp)
 
 # 链接 OpenCV 库
 target_link_libraries(a_star ${OpenCV_LIBS})
+
+# 确保启用调试符号
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+
