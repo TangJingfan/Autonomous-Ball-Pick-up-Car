@@ -27,6 +27,7 @@ vector<vector<int>> loadPGM(const string &filename) {
 }
 
 struct a_star_node {
+  // member
   pair<int, int> point;
   int f;
   int g;
@@ -42,6 +43,15 @@ struct a_star_node {
   // compare operator
   bool operator>(const a_star_node &other) const { return f > other.f; }
 };
+
+int manhattan_distance(pair<int, int> first, pair<int, int> second) {
+  return abs(first.first - second.first) + abs(first.second - second.second);
+}
+
+double euclidean_distance(pair<int, int> first, pair<int, int> second) {
+  return sqrt(pow(first.first - second.first, 2) +
+              pow(first.second - second.second, 2));
+}
 
 void a_star_search(pair<int, int> start, pair<int, int> end) {}
 
