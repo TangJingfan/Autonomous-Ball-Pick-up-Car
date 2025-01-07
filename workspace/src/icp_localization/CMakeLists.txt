@@ -123,7 +123,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
-  ${CMAKE_SOURCE_DIR}/nanoflann/include()
+  ${CMAKE_SOURCE_DIR}/nanoflann/include
 )
 
 ## Declare a C++ library
