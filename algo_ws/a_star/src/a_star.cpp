@@ -53,7 +53,24 @@ double euclidean_distance(pair<int, int> first, pair<int, int> second) {
               pow(first.second - second.second, 2));
 }
 
-void a_star_search(pair<int, int> start, pair<int, int> end) {}
+// we use euclidean distance as our cost function
+vector<pair<int, int>> find_neighbor(pair<int, int> parent,
+                                     vector<vector<int>> map) {
+  vector<pair<int, int>> neighbor;
+  const vector<pair<int, int>> direction = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1},
+                                            {0, 1},   {1, -1}, {1, 0},  {1, 1}};
+  for (const auto &dir : direction) {
+    int nx = parent.first + dir.first;
+    int ny = parent.second + dir.second;
+    if (nx >= 0 && nx <= map.size() && ny >= 0 && ny <= map[0].size() &&
+        map[nx][ny] == 254) {
+      neighbor.push_back({nx, ny});
+    }
+  }
+}
+
+void a_star_search(pair<int, int> start, pair<int, int> end,
+                   vector<vector<int>> map) {}
 
 int main() {
   string pgmFile = "../map/map.pgm";
