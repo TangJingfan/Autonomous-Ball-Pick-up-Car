@@ -127,12 +127,33 @@ vector<pair<int, int>> a_star_search(pair<int, int> start, pair<int, int> end,
   return {};
 }
 
+void arrayToImage(const vector<vector<int>> &array, int row_start, int row_end,
+                  int col_start, int col_end, const string &filename) {
+  int rows = array.size();
+  int cols = array[0].size();
+
+  // create mat object
+  Mat img(rows, cols, CV_8U);
+
+  for (int i = row_start; i < row_end; ++i) {
+    for (int j = col_start; j < col_end; ++j) {
+      img.at<uchar>(i, j) = static_cast<uchar>(array[i][j]);
+    }
+  }
+
+  // save image
+  imwrite(filename, img);
+}
+
 int main() {
   string pgmFile = "../map/map.pgm"; // Adjust path as needed
   vector<vector<int>> map = loadPGM(pgmFile);
 
-  pair<int, int> start = {1033, 1016};
-  pair<int, int> end = {1043, 1025};
+  pair<int, int> start = {1064, 1032};
+  pair<int, int> end = {1041, 1045};
+
+  pair<int, int> row = {1000, 1090};
+  pair<int, int> col = {1000, 1070};
 
   vector<pair<int, int>> path = a_star_search(start, end, map);
 
@@ -140,11 +161,15 @@ int main() {
     cout << "Path found:\n";
     for (const auto &p : path) {
       cout << "(" << p.first << ", " << p.second << ") ";
+      map[p.first][p.second] = 6;
     }
     cout << endl;
   } else {
     cout << "No path found.\n";
+    return 0;
   }
+
+  arrayToImage(map, row.first, row.second, col.first, col.second, "route.png");
 
   return 0;
 }
