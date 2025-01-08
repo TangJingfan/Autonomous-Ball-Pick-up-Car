@@ -115,6 +115,7 @@ private:
 
     // perform icp matching
     Eigen::Matrix3d transform = performICP(scan_points);
+    ROS_INFO_STREAM("Transform matrix:\n" << transform);
     // update pose
     updatePose(transform);
     // publish pose
@@ -148,7 +149,6 @@ private:
         if (value == 100) { // occupied point
           double map_x = origin_x + x * resolution;
           double map_y = origin_y + y * resolution;
-
           cloud.points.emplace_back(Point2D{map_x, map_y});
 
           ROS_INFO("Point added: (%f, %f)", map_x, map_y);
