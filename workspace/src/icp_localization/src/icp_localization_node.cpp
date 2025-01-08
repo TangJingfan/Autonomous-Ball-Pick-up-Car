@@ -255,11 +255,33 @@ private:
       total_transform = current_transform * total_transform;
 
       // apply transform
-      for (auto &point : source_transformed) {
-        Eigen::Vector3d pt(point.x, point.y, 1.0);
-        Eigen::Vector3d pt_transformed = current_transform * pt;
-        point.x = pt_transformed(0);
-        point.y = pt_transformed(1);
+      // 找到最近邻点，并添加匹配点对的距离约束
+      for (const auto &point : source_transformed) {
+        double query_pt[2] = {point.x, point.y};
+        size_t ret_index;
+        double out_dist_sqr;
+        nanoflann::KNNResultSet<double> resultSet(1);
+        resultSet.init(&ret_index, &out_dist_sqr);
+        kd_tree_->findNeighbors(resultSet, &query_pt[0],
+                                nanoflann::SearchParameters(10));
+
+        // 距离约束：过滤掉太远的匹配点
+        if (std::sqrt(out_dist_sqr) < max_distance_threshold) {
+          target_matched.emplace_back(map_cloud_.points[ret_index]);
+        }
+      }
+
+      // 改进 SVD 后的旋转矩阵计算，确保反射问题处理正确
+      if (R.determinant() < 0) {
+        Eigen::Matrix2d V = svd.matrixV();
+        V.col(1) *= -1;
+        R = V * svd.matrixU().transpose();
+      }
+
+      // 在匹配点对的基础上，优化点对权重
+      for (size_t i = 0; i < src_centered.size(); ++i) {
+        double weight = computeWeight(src_centered[i], tgt_centered[i]);
+        H += weight * src_centered[i] * tgt_centered[i].transpose();
       }
 
       // calculate error
