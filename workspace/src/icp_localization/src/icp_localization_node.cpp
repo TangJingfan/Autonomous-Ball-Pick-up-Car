@@ -191,71 +191,13 @@ private:
     // set icp iteration times
     int max_iterations = 30;
     double tolerance = 1e-4;
+    double max_distance_threshold = 0.5; // 距离阈值，需根据数据调整
 
     std::vector<Point2D> source_transformed = source;
 
     for (int iter = 0; iter < max_iterations; ++iter) {
-      // find closest
+      // find closest points with distance constraint
       std::vector<Point2D> target_matched;
-      for (const auto &point : source_transformed) {
-        double query_pt[2] = {point.x, point.y};
-        size_t ret_index;
-        double out_dist_sqr;
-        nanoflann::KNNResultSet<double> resultSet(1);
-        resultSet.init(&ret_index, &out_dist_sqr);
-        kd_tree_->findNeighbors(resultSet, &query_pt[0],
-                                nanoflann::SearchParameters(10));
-        target_matched.emplace_back(map_cloud_.points[ret_index]);
-      }
-
-      // calculate centroid
-      Point2D centroid_source = computeCentroid(source_transformed);
-      Point2D centroid_target = computeCentroid(target_matched);
-
-      // centralize point cloud
-      std::vector<Eigen::Vector2d> src_centered;
-      std::vector<Eigen::Vector2d> tgt_centered;
-      for (size_t i = 0; i < source_transformed.size(); ++i) {
-        src_centered.emplace_back(
-            Eigen::Vector2d(source_transformed[i].x - centroid_source.x,
-                            source_transformed[i].y - centroid_source.y));
-        tgt_centered.emplace_back(
-            Eigen::Vector2d(target_matched[i].x - centroid_target.x,
-                            target_matched[i].y - centroid_target.y));
-      }
-
-      // calculate rotation matrix
-      Eigen::Matrix2d H = Eigen::Matrix2d::Zero();
-      for (size_t i = 0; i < src_centered.size(); ++i) {
-        H += src_centered[i] * tgt_centered[i].transpose();
-      }
-
-      Eigen::JacobiSVD<Eigen::Matrix2d> svd(H, Eigen::ComputeFullU |
-                                                   Eigen::ComputeFullV);
-      Eigen::Matrix2d R = svd.matrixV() * svd.matrixU().transpose();
-
-      // prevent reflection
-      if (R.determinant() < 0) {
-        Eigen::Matrix2d V = svd.matrixV();
-        V.col(1) *= -1;
-        R = V * svd.matrixU().transpose();
-      }
-
-      // calculation translation vector
-      Eigen::Vector2d t =
-          Eigen::Vector2d(centroid_target.x, centroid_target.y) -
-          R * Eigen::Vector2d(centroid_source.x, centroid_source.y);
-
-      // current transform matrix
-      Eigen::Matrix3d current_transform = Eigen::Matrix3d::Identity();
-      current_transform.block<2, 2>(0, 0) = R;
-      current_transform.block<2, 1>(0, 2) = t;
-
-      // update transform
-      total_transform = current_transform * total_transform;
-
-      // apply transform
-      // 找到最近邻点，并添加匹配点对的距离约束
       for (const auto &point : source_transformed) {
         double query_pt[2] = {point.x, point.y};
         size_t ret_index;
@@ -271,20 +213,64 @@ private:
         }
       }
 
-      // 改进 SVD 后的旋转矩阵计算，确保反射问题处理正确
+      // calculate centroids
+      Point2D centroid_source = computeCentroid(source_transformed);
+      Point2D centroid_target = computeCentroid(target_matched);
+
+      // centralize point cloud
+      std::vector<Eigen::Vector2d> src_centered;
+      std::vector<Eigen::Vector2d> tgt_centered;
+      for (size_t i = 0; i < source_transformed.size(); ++i) {
+        src_centered.emplace_back(
+            Eigen::Vector2d(source_transformed[i].x - centroid_source.x,
+                            source_transformed[i].y - centroid_source.y));
+        tgt_centered.emplace_back(
+            Eigen::Vector2d(target_matched[i].x - centroid_target.x,
+                            target_matched[i].y - centroid_target.y));
+      }
+
+      // calculate weighted covariance matrix H
+      Eigen::Matrix2d H = Eigen::Matrix2d::Zero();
+      for (size_t i = 0; i < src_centered.size(); ++i) {
+        double weight =
+            computeWeight(src_centered[i], tgt_centered[i]); // 自定义权重函数
+        H += weight * src_centered[i] * tgt_centered[i].transpose();
+      }
+
+      // calculate SVD for rotation
+      Eigen::JacobiSVD<Eigen::Matrix2d> svd(H, Eigen::ComputeFullU |
+                                                   Eigen::ComputeFullV);
+      Eigen::Matrix2d R = svd.matrixV() * svd.matrixU().transpose();
+
+      // prevent reflection
       if (R.determinant() < 0) {
         Eigen::Matrix2d V = svd.matrixV();
         V.col(1) *= -1;
         R = V * svd.matrixU().transpose();
       }
 
-      // 在匹配点对的基础上，优化点对权重
-      for (size_t i = 0; i < src_centered.size(); ++i) {
-        double weight = computeWeight(src_centered[i], tgt_centered[i]);
-        H += weight * src_centered[i] * tgt_centered[i].transpose();
+      // calculate translation vector
+      Eigen::Vector2d t =
+          Eigen::Vector2d(centroid_target.x, centroid_target.y) -
+          R * Eigen::Vector2d(centroid_source.x, centroid_source.y);
+
+      // current transform matrix
+      Eigen::Matrix3d current_transform = Eigen::Matrix3d::Identity();
+      current_transform.block<2, 2>(0, 0) = R;
+      current_transform.block<2, 1>(0, 2) = t;
+
+      // update total transform
+      total_transform = current_transform * total_transform;
+
+      // apply current transform to source points
+      for (auto &point : source_transformed) {
+        Eigen::Vector3d pt(point.x, point.y, 1.0);
+        Eigen::Vector3d pt_transformed = current_transform * pt;
+        point.x = pt_transformed(0);
+        point.y = pt_transformed(1);
       }
 
-      // calculate error
+      // calculate RMSE
       double rmse = 0.0;
       for (size_t i = 0; i < source_transformed.size(); ++i) {
         double dx = source_transformed[i].x - target_matched[i].x;
