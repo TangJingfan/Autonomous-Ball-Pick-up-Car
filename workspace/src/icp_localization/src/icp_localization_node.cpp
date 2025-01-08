@@ -144,7 +144,10 @@ private:
       for (unsigned int x = 0; x < map.info.width; ++x) {
         int index = x + y * map.info.width;
         int8_t value = map.data[index];
-        ROS_INFO("Grid (%d, %d): Value = %d", x, y, value);
+        if (x >= 1000 && x <= 1200 && y >= 1000 && y <= 1200) {
+          ROS_INFO("Grid (%d, %d): Value = %d", x, y, value);
+        }
+
         if (value >= 75) { // occupied point
           double map_x = origin_x + x * resolution;
           double map_y = origin_y + y * resolution;
