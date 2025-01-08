@@ -144,11 +144,8 @@ private:
       for (unsigned int x = 0; x < map.info.width; ++x) {
         int index = x + y * map.info.width;
         int8_t value = map.data[index];
-        if (value != -1) {
-          ROS_INFO("Grid (%d, %d): Value = %d", x, y, value);
-        }
 
-        if (value >= 75) { // occupied point
+        if (value == 100) { // occupied point
           double map_x = origin_x + x * resolution;
           double map_y = origin_y + y * resolution;
           cloud.points.emplace_back(Point2D{map_x, map_y});
