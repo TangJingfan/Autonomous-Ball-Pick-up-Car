@@ -4,3 +4,6 @@
 [submodule "workspace/src/nanoflann"]
 	path = workspace/src/nanoflann
 	url = git@github.com:TangJingfan/nanoflann.git
+[submodule "workspace/src/rf2o_laser_odometry"]
+	path = workspace/src/rf2o_laser_odometry
+	url = git@github.com:TangJingfan/rf2o_laser_odometry.git
