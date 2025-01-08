@@ -191,12 +191,11 @@ private:
     // set icp iteration times
     int max_iterations = 30;
     double tolerance = 1e-4;
-    double max_distance_threshold = 0.5;
 
     std::vector<Point2D> source_transformed = source;
 
     for (int iter = 0; iter < max_iterations; ++iter) {
-      // find closest points with distance constraint
+      // find closest
       std::vector<Point2D> target_matched;
       for (const auto &point : source_transformed) {
         double query_pt[2] = {point.x, point.y};
@@ -206,13 +205,10 @@ private:
         resultSet.init(&ret_index, &out_dist_sqr);
         kd_tree_->findNeighbors(resultSet, &query_pt[0],
                                 nanoflann::SearchParameters(10));
-
-        if (std::sqrt(out_dist_sqr) < max_distance_threshold) {
-          target_matched.emplace_back(map_cloud_.points[ret_index]);
-        }
+        target_matched.emplace_back(map_cloud_.points[ret_index]);
       }
 
-      // calculate centroids
+      // calculate centroid
       Point2D centroid_source = computeCentroid(source_transformed);
       Point2D centroid_target = computeCentroid(target_matched);
 
@@ -228,14 +224,12 @@ private:
                             target_matched[i].y - centroid_target.y));
       }
 
-      // calculate weighted covariance matrix H
+      // calculate rotation matrix
       Eigen::Matrix2d H = Eigen::Matrix2d::Zero();
       for (size_t i = 0; i < src_centered.size(); ++i) {
-        double weight = computeWeight(src_centered[i], tgt_centered[i]);
-        H += weight * src_centered[i] * tgt_centered[i].transpose();
+        H += src_centered[i] * tgt_centered[i].transpose();
       }
 
-      // calculate SVD for rotation
       Eigen::JacobiSVD<Eigen::Matrix2d> svd(H, Eigen::ComputeFullU |
                                                    Eigen::ComputeFullV);
       Eigen::Matrix2d R = svd.matrixV() * svd.matrixU().transpose();
@@ -247,7 +241,7 @@ private:
         R = V * svd.matrixU().transpose();
       }
 
-      // calculate translation vector
+      // calculation translation vector
       Eigen::Vector2d t =
           Eigen::Vector2d(centroid_target.x, centroid_target.y) -
           R * Eigen::Vector2d(centroid_source.x, centroid_source.y);
@@ -257,10 +251,10 @@ private:
       current_transform.block<2, 2>(0, 0) = R;
       current_transform.block<2, 1>(0, 2) = t;
 
-      // update total transform
+      // update transform
       total_transform = current_transform * total_transform;
 
-      // apply current transform to source points
+      // apply transform
       for (auto &point : source_transformed) {
         Eigen::Vector3d pt(point.x, point.y, 1.0);
         Eigen::Vector3d pt_transformed = current_transform * pt;
@@ -268,7 +262,7 @@ private:
         point.y = pt_transformed(1);
       }
 
-      // calculate RMSE
+      // calculate error
       double rmse = 0.0;
       for (size_t i = 0; i < source_transformed.size(); ++i) {
         double dx = source_transformed[i].x - target_matched[i].x;
@@ -290,13 +284,6 @@ private:
     }
 
     return total_transform;
-  }
-
-  double computeWeight(const Eigen::Vector2d &src_point,
-                       const Eigen::Vector2d &tgt_point) {
-    double distance = (src_point - tgt_point).norm();
-    double threshold = 0.5;
-    return (distance < threshold) ? 1.0 : 0.0;
   }
 
   Point2D computeCentroid(const std::vector<Point2D> &points) {
