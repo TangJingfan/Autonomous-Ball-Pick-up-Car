@@ -191,7 +191,7 @@ private:
     // set icp iteration times
     int max_iterations = 30;
     double tolerance = 1e-4;
-    double max_distance_threshold = 0.5; // 距离阈值，需根据数据调整
+    double max_distance_threshold = 0.5;
 
     std::vector<Point2D> source_transformed = source;
 
@@ -207,7 +207,6 @@ private:
         kd_tree_->findNeighbors(resultSet, &query_pt[0],
                                 nanoflann::SearchParameters(10));
 
-        // 距离约束：过滤掉太远的匹配点
         if (std::sqrt(out_dist_sqr) < max_distance_threshold) {
           target_matched.emplace_back(map_cloud_.points[ret_index]);
         }
@@ -232,8 +231,7 @@ private:
       // calculate weighted covariance matrix H
       Eigen::Matrix2d H = Eigen::Matrix2d::Zero();
       for (size_t i = 0; i < src_centered.size(); ++i) {
-        double weight =
-            computeWeight(src_centered[i], tgt_centered[i]); // 自定义权重函数
+        double weight = computeWeight(src_centered[i], tgt_centered[i]);
         H += weight * src_centered[i] * tgt_centered[i].transpose();
       }
 
@@ -292,6 +290,13 @@ private:
     }
 
     return total_transform;
+  }
+
+  double computeWeight(const Eigen::Vector2d &src_point,
+                       const Eigen::Vector2d &tgt_point) {
+    double distance = (src_point - tgt_point).norm();
+    double threshold = 0.5;
+    return (distance < threshold) ? 1.0 : 0.0;
   }
 
   Point2D computeCentroid(const std::vector<Point2D> &points) {
