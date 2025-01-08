@@ -144,7 +144,7 @@ private:
       for (unsigned int x = 0; x < map.info.width; ++x) {
         int index = x + y * map.info.width;
         int8_t value = map.data[index];
-        if (x >= 1000 && x <= 1200 && y >= 1000 && y <= 1200) {
+        if (value != -1) {
           ROS_INFO("Grid (%d, %d): Value = %d", x, y, value);
         }
 
