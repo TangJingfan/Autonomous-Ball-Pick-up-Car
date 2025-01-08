@@ -14,14 +14,17 @@
 #include <tf/transform_broadcaster.h>
 #include <vector>
 
+// define a 2D point struct
 struct Point2D {
   double x, y;
 };
 
+// define a 2D point cloud struct
 struct PointCloud {
   std::vector<Point2D> points;
-
+  // get the size of point cloud
   inline size_t kdtree_get_point_count() const { return points.size(); }
+  // idx is index; dim == 0 -> value of x; dim == 1 -> value of y
   inline double kdtree_get_pt(const size_t idx, const size_t dim) const {
     if (dim == 0) {
       return points[idx].x;
@@ -29,19 +32,23 @@ struct PointCloud {
       return points[idx].y;
     }
   }
-
+  // bounding box; optimize the performance of kd tree
   template <class BBOX> bool kdtree_get_bbox(BBOX & /* bb */) const {
     return false;
   }
 };
 
-typedef nanoflann::KDTreeSingleIndexAdaptor<
-    nanoflann::L2_Simple_Adaptor<double, PointCloud>, PointCloud, 2 /* dim */
-    >
-    my_kd_tree_t;
+// define a kd tree structure; use euclidean distance as distance function
+// kd tree will be performed on 2D point cloud
+typedef nanoflann::
+    KDTreeSingleIndexAdaptor</* distance function*/
+                             nanoflann::L2_Simple_Adaptor<double, PointCloud>,
+                             /*data structure*/ PointCloud, /* dim */ 2>
+        my_kd_tree_t;
 
 class ICPLocalization {
 public:
+  // constructor
   ICPLocalization(ros::NodeHandle &nh)
       : nh_(nh), map_received_(false), pose_x_(0.0), pose_y_(0.0),
         pose_theta_(0.0) {
@@ -53,6 +60,7 @@ public:
     pose_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("/robot_pose", 10);
     // init tf broadcaster
     tf::TransformBroadcaster tf_broadcaster_;
+    // publish point cloud
     map_cloud_pub_ =
         nh_.advertise<sensor_msgs::PointCloud2>("/map_point_cloud", 1);
   }
@@ -65,6 +73,7 @@ private:
   tf::TransformBroadcaster tf_broadcaster_;
   ros::Publisher map_cloud_pub_;
 
+  // the structure for point cloud of the map
   PointCloud map_cloud_;
   my_kd_tree_t *kd_tree_;
   bool map_received_;
@@ -77,17 +86,22 @@ private:
   void mapCallback(const nav_msgs::OccupancyGrid::ConstPtr &msg) {
     if (map_received_)
       return; // only use callback function once
+
     // convert grid map to point cloud
     convertMapToPointCloud(*msg, map_cloud_);
+
     // construct kd tree
     kd_tree_ = new my_kd_tree_t(2, map_cloud_,
                                 nanoflann::KDTreeSingleIndexAdaptorParams(10));
     kd_tree_->buildIndex();
+
+    // receive map
     map_received_ = true;
     ROS_INFO("Map received and converted to point cloud.");
   }
 
   void scanCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
+    // check whether receive map
     if (!map_received_) {
       ROS_WARN("Map not received yet.");
       return;
@@ -98,6 +112,7 @@ private:
       ROS_WARN("No valid scan points.");
       return;
     }
+
     // perform icp matching
     Eigen::Matrix3d transform = performICP(scan_points);
     // update pose
@@ -108,10 +123,18 @@ private:
 
   void convertMapToPointCloud(const nav_msgs::OccupancyGrid &map,
                               PointCloud &cloud) {
+    // delete old cloud point info
     cloud.points.clear();
+    // load basic map info
     double resolution = map.info.resolution;
     double origin_x = map.info.origin.position.x;
     double origin_y = map.info.origin.position.y;
+
+    ROS_INFO("Map Info:");
+    ROS_INFO("Resolution: %f", map.info.resolution);
+    ROS_INFO("Width: %d, Height: %d", map.info.width, map.info.height);
+    ROS_INFO("Origin: (%f, %f)", map.info.origin.position.x,
+             map.info.origin.position.y);
 
     // PCL point cloud
     pcl::PointCloud<pcl::PointXYZ>::Ptr pcl_cloud(
