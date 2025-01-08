@@ -144,10 +144,13 @@ private:
       for (unsigned int x = 0; x < map.info.width; ++x) {
         int index = x + y * map.info.width;
         int8_t value = map.data[index];
+        ROS_INFO("Grid (%d, %d): Value = %d", x, y, value);
         if (value >= 75) { // occupied point
           double map_x = origin_x + x * resolution;
           double map_y = origin_y + y * resolution;
           cloud.points.emplace_back(Point2D{map_x, map_y});
+
+          ROS_INFO("Point added: (%f, %f)", map_x, map_y);
 
           // Add to PCL cloud
           pcl_cloud->points.emplace_back(pcl::PointXYZ(map_x, map_y, 0.0));
