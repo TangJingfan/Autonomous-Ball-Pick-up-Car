@@ -146,8 +146,9 @@ private:
         int8_t value = map.data[index];
 
         if (value == 100) { // occupied point
-          double map_x = (origin_x + x) * resolution;
-          double map_y = (origin_y + y) * resolution;
+          double map_x = origin_x + x * resolution;
+          double map_y = origin_y + y * resolution;
+
           cloud.points.emplace_back(Point2D{map_x, map_y});
 
           ROS_INFO("Point added: (%f, %f)", map_x, map_y);
