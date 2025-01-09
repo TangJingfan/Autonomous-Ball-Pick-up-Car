@@ -3,5 +3,8 @@
   <include file="$(find map)/launch/map_load.launch">
 
   <node pkg="move_base" type="move_base" name="move_base" output="screen">
+    <rosparam file=>
+    <param name="base_global_planner" value="global_planner/GlobalPlanner">
+    <param name="base_local_planner" value=>
   </node>
 </launch>
