@@ -1,4 +1,4 @@
-image: /home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/point_to_point_nav/map_info/map.pgm
+image: /home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/map/map_info/map.pgm
 resolution: 0.050000
 origin: [-51.224998, -51.224998, 0.000000]
 negate: 0
