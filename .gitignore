@@ -5,6 +5,7 @@ structure/2nd/
 *.DXF
 docs/
 .vscode/
+.vscode/*
 log/
 log/*
 build/
