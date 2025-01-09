@@ -1,4 +1,6 @@
 <launch>
   <arg name="map" default="map.yaml"/>
   <node pkg="map_server" name="map_server" type="map_server" args="$(find point_to_point_nav)/map_info/$(arg map)"/>
+  
+  <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 /odom /map 100"/>
 </launch>
