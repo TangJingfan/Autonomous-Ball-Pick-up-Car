@@ -1,6 +1,4 @@
 <launch>
-  <!-- run rviz -->
-  <node pkg="rviz" type="rviz" name="rviz" />
   <!-- node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher" / -->
   <!-- node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" / -->
   <!-- load map -->
@@ -9,4 +7,6 @@
   <include file="$(find rplidar_ros)/launch/rplidar.launch" />
   <!-- start amcl -->
   <include file="$(find point_to_point_nav)/launch/amcl.launch" />
+  <!-- run rviz -->
+  <node pkg="rviz" type="rviz" name="rviz" />
 </launch>
