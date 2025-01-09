@@ -5,6 +5,9 @@
   <include file="$(find map)/launch/map_load.launch" />
   <!-- load lidar-->
   <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+
+  <include file="$(find rf2o_laser_odometry)/launch/rf2o_laser_odometry.launch">
+
   <node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0 0 0 0 /base_link /laser 100"/>
   <!-- start amcl -->
   <include file="$(find point_to_point_nav)/launch/amcl.launch" />
