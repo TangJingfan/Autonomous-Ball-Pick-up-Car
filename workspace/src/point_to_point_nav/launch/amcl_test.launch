@@ -8,7 +8,7 @@
 
   <include file="$(find rf2o_laser_odometry)/launch/rf2o_laser_odometry.launch" />
 
-  <node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0 0 0 0 /base_link /laser 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="laser_to_base_broadcaster" args="0 0 0 0 0 0 /laser /base_link 100"/>
   <!-- start amcl -->
   <include file="$(find point_to_point_nav)/launch/amcl.launch" />
   <!-- run rviz -->
