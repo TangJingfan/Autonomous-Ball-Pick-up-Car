@@ -9,7 +9,10 @@
 
   <!-- load lidar -->
   <include file="$(find rplidar_ros)/launch/rplidar.launch" />
-  
+
+  <!-- load odom -->
+  <include file="$(find rf2o_laser_odometry)/launch/rf2o_laser_odometry.launch" />
+
   <!-- launch AMCL -->
   <include file="$(find point_to_point_nav)/launch/amcl.launch" />
   
