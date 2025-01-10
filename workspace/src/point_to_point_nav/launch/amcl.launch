@@ -40,5 +40,4 @@
     <param name="recovery_alpha_fast" value="0.0" />
   </node>
 
-  <include file="$(find point_to_point_nav)/launch/base_link_to_laser.launch"/>
 </launch>

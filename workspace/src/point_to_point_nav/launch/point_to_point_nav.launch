@@ -16,6 +16,8 @@
   <!-- launch AMCL -->
   <include file="$(find point_to_point_nav)/launch/amcl.launch" />
   
+  <include file="$(find point_to_point_nav)/launch/base_link_to_laser.launch"/>
+
   <!-- launch move_base -->
   <include file="$(find point_to_point_nav)/launch/move_base.launch" />
 </launch>

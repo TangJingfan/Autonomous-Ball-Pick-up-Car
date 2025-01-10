@@ -11,6 +11,8 @@
 
   <!-- start amcl -->
   <include file="$(find point_to_point_nav)/launch/amcl.launch" />
+
+  <include file="$(find point_to_point_nav)/launch/base_link_to_laser.launch"/>
   <!-- run rviz -->
   <node pkg="rviz" type="rviz" name="rviz" />
 </launch>
