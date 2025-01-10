@@ -31,13 +31,20 @@ To improve mapping efficiency, we implement a simple exploration algorithm. Foll
 ```bash
 sudo chmod 666 /dev/arduino
 roslaunch explore explore.launch
-roslaunch point_to_point_nav map_save.launch
+roslaunch map map_save.launch
 ```
 
-## Localization
+## Odometry
 
-We apply ICP algorithm to localize the robot. Following command will visualize the result. Additionally, you can change the representation in rviz.
+We mainly used the package rf2o_laser_odometry. Follow the command below to run odometry.
 
 ```bash
-roslaunch icp_localization icp_localization.launch
+roslaunch rf2o_laser_odometry rf2o_laser_odometry.launch
+```
+## Localization
+
+For simplicity, we apply AMCL algorithm to help robot localize itself. Follow the step below.
+
+```bash
+roslaunch point_to_point_nav amcl_test.launch
 ```
