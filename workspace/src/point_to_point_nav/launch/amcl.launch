@@ -40,5 +40,5 @@
     <param name="recovery_alpha_fast" value="0.0" />
   </node>
 
-  <node pkg="tf" type="static_transform_publisher" name="laser_to_base_broadcaster" args="0 0 0 0 0 0 /base_link /laser 100"/>
+  <include file="$(find point_to_point_nav)/launch/base_link_to_laser.launch"/>
 </launch>
