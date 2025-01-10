@@ -6,6 +6,9 @@
   
   <!-- load map -->
   <include file="$(find map)/launch/map_load.launch" />
+
+  <!-- load lidar -->
+  <include file="$(find rplidar_ros)/launch/rplidar.launch" />
   
   <!-- launch AMCL -->
   <include file="$(find point_to_point_nav)/launch/amcl.launch" />
