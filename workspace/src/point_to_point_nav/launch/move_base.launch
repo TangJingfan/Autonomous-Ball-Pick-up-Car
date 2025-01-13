@@ -5,5 +5,6 @@
       <rosparam file="$(find point_to_point_nav)/param/local_costmap_param.yaml" command="load" />
       <rosparam file="$(find point_to_point_nav)/param/global_costmap_param.yaml" command="load" />
       <rosparam file="$(find point_to_point_nav)/param/base_local_planner_param.yaml" command="load" />
+      <param name="base_global_planner" value="global_planner/GlobalPlanner" />
   </node>
 </launch>
