@@ -11,7 +11,7 @@ All structural files are stored in the `structure` directory. The naming convent
 - Individual parts: `<name>-<manufacture_method>_<date>.SLDPRT`
 - Assembly file: `picker_assembly_20241130.SLDASM`
 
-## Laser SLAM
+## Passive Laser SLAM
 
 Hector SLAM is used in this project. Follow the steps below to configure and run Laser SLAM:
 
@@ -43,8 +43,15 @@ roslaunch rf2o_laser_odometry rf2o_laser_odometry.launch
 ```
 ## Localization
 
-For simplicity, we apply AMCL algorithm to help robot localize itself. Follow the step below.
+- For simplicity, we apply AMCL algorithm to help robot localize itself. Follow the step below.
 
 ```bash
 roslaunch point_to_point_nav amcl_test.launch
 ```
+
+- However, we also provide a localization method by laser lidar. After mapping the targeted places, you can follow the step below.
+
+```bash
+roslaunch point_to_point_nav point_to_point_nav.launch
+```
+
