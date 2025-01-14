@@ -4,7 +4,10 @@
 
 serial::Serial ser;
 
-void cmd_vel_call_back(const geometry_msgs::Twist::ConstPtr &msg) {}
+void cmd_vel_call_back(const geometry_msgs::Twist::ConstPtr &msg) {
+  double linear_x = msg->linear.x;
+  double angular_z = msg->angular.z;
+}
 
 int main(int argc, char **argv) {
   ros::init(argc, argc, "nav_driver");
