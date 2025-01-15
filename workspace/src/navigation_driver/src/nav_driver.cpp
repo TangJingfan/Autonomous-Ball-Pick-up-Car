@@ -12,12 +12,16 @@ std::string generate_control_command(double linear_x, double angular_z) {
   // set command for chassis
   if (linear_x > 0) {
     // forward
-    command =
-        "<" + std::to_string(static_cast<int>(linear_x * 100)) + ",0,0,0>";
+    command = "<" + std::to_string(static_cast<int>(linear_x * 100)) + "," +
+              std::to_string(static_cast<int>(linear_x * 100)) + "," +
+              std::to_string(static_cast<int>(linear_x * 100)) + "," +
+              std::to_string(static_cast<int>(linear_x * 100)) + ">";
   } else if (linear_x < 0) {
     // backward
-    command =
-        "<0,0," + std::to_string(static_cast<int>(-linear_x * 100)) + ",0>";
+    command = "<" + std::to_string(static_cast<int>(-linear_x * 100)) + "," +
+              std::to_string(static_cast<int>(-linear_x * 100)) + "," +
+              std::to_string(static_cast<int>(-linear_x * 100)) + "," +
+              std::to_string(static_cast<int>(-linear_x * 100)) + ">";
   }
 
   if (angular_z > 0) {
