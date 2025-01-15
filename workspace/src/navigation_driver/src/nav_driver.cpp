@@ -17,8 +17,8 @@ std::string generate_control_command(double linear, double angular) {
   double factor = 255.0 / 3.0; // Scale factor for linear velocity
 
   // step 2. calculate voltage as double
-  double v_left = (linear * factor) - ((angular * width) * 255.0 / 2.0);
-  double v_right = (linear * factor) + ((angular * width) * 255.0 / 2.0);
+  double v_left = 70.0 - ((angular * width) * 255.0 / 2.0);
+  double v_right = 70.0 + ((angular * width) * 255.0 / 2.0);
 
   // step 3. apply minimum voltage or other constraints
   int voltage_left = std::max(40, static_cast<int>(v_left));
