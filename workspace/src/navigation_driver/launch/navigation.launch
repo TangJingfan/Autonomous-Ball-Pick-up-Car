@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="navigation_driver" type="navigation_driver" name="navigation_driver" output="screen">
+    <param name="serial_port" value="/dev/arduino" />
+    <param name="baudrate" value="115200" />
+  </node>
+</launch>
