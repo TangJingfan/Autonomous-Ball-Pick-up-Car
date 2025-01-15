@@ -22,9 +22,9 @@ std::string generate_control_command(double linear, double angular) {
 
   // step 3. calculate corresponding voltage
   int voltage_left =
-      floor((linear * 255) / 3) - floor((angular * width) * 255 / 6);
+      floor((linear * 255) / 3) - floor((angular * width) * 255 / 2);
   int voltage_right =
-      floor((linear * 255) / 3) + floor((angular * width) * 255 / 6);
+      floor((linear * 255) / 3) + floor((angular * width) * 255 / 2);
 
   // step 4. set command
   command = "<" + std::to_string(voltage_left) + "," +
