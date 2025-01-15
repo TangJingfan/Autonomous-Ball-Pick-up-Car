@@ -14,24 +14,15 @@ std::string generate_control_command(double linear, double angular) {
 
   // step 1. set parameters of the car (unit: m)
   double width = 0.24;
+  double factor = 255.0 / 3.0; // Scale factor for linear velocity
 
-  // step 2. calculate velocity of left wheels and right wheels
-  /*
-   * double v_left = linear - (angular * width) / 2;
-   * double v_right = linear + (angular * width) / 2;
-   */
+  // step 2. calculate voltage as double
+  double v_left = (linear * factor) - ((angular * width) * 255.0 / 2.0);
+  double v_right = (linear * factor) + ((angular * width) * 255.0 / 2.0);
 
-  // step 3. calculate corresponding voltage
-  int voltage_left =
-      floor((linear * 255) / 3) - floor((angular * width) * 255 / 2);
-  int voltage_right =
-      floor((linear * 255) / 3) + floor((angular * width) * 255 / 2);
-
-  if (std::min(voltage_left, voltage_right) < 40 && std::max(voltage_left, voltage_right)< 100) {
-    int bonus = ceil(40.0/std::max(voltage_left, voltage_right));
-    voltage_left *= bonus;
-    voltage_right *= bonus;
-  }
+  // step 3. apply minimum voltage or other constraints
+  int voltage_left = std::max(40, static_cast<int>(v_left));
+  int voltage_right = std::max(40, static_cast<int>(v_right));
 
   // step 4. set command
   command = "<" + std::to_string(voltage_left) + "," +
