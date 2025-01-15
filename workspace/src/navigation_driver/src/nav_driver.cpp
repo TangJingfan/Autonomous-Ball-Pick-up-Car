@@ -53,6 +53,7 @@ std::string generate_control_command_rotation_first(double linear,
               "," + std::to_string(voltage) + "," + std::to_string(voltage) +
               ">";
   }
+  return command;
 }
 
 // send info to arduino
