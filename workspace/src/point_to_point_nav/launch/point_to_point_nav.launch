@@ -12,7 +12,7 @@
   <include file="$(find rf2o_laser_odometry)/launch/rf2o_laser_odometry.launch" />
 
   <!-- launch lidar localization -->
-  <include file="$(find lidar_loc)/launch/lidar_loc.launch">
+  <include file="$(find lidar_loc)/launch/lidar_loc.launch" />
   
   <include file="$(find point_to_point_nav)/launch/base_link_to_laser.launch"/>
 
