@@ -15,12 +15,16 @@ std::string generate_control_command(double linear, double angular) {
   double width = 0.24;
 
   // step 2. calculate velocity of left wheels and right wheels
-  double v_left = linear - (angular * width) / 2;
-  double v_right = linear + (angular * width) / 2;
+  /*
+   * double v_left = linear - (angular * width) / 2;
+   * double v_right = linear + (angular * width) / 2;
+   */
 
   // step 3. calculate corresponding voltage
-  int voltage_left = floor(v_left / 0.4 * 255);
-  int voltage_right = floor(v_left / 0.4 * 255);
+  int voltage_left =
+      floor(v_left / 0.4 * 255 - (angular * width) / (2 * 0.3) * 255);
+  int voltage_right =
+      floor(v_left / 0.4 * 255 + (angular * width) / (2 * 0.3) * 255);
 
   // step 4. set command
   command = "<" + std::to_string(voltage_left) + "," +
