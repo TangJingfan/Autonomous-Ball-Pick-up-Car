@@ -1,3 +1,4 @@
+#include <cmath>
 #include <geometry_msgs/Twist.h>
 #include <iostream>
 #include <ros/ros.h>
@@ -6,31 +7,20 @@
 
 serial::Serial ser;
 
-std::string generate_control_command(double linear_x, double angular_z) {
-  std::string command = "<0,0,0,0>"; // init command
+std::string generate_control_command(double linear, double angular) {
+  // init command
+  std::string command = "<0,0,0,0>";
 
-  // set command for chassis
-  if (linear_x > 0) {
-    // forward
-    command = "<" + std::to_string(static_cast<int>(linear_x * 100)) + "," +
-              std::to_string(static_cast<int>(linear_x * 100)) + "," +
-              std::to_string(static_cast<int>(linear_x * 100)) + "," +
-              std::to_string(static_cast<int>(linear_x * 100)) + ">";
-  } else if (linear_x < 0) {
-    // backward
-    command = "<" + std::to_string(static_cast<int>(-linear_x * 100)) + "," +
-              std::to_string(static_cast<int>(-linear_x * 100)) + "," +
-              std::to_string(static_cast<int>(-linear_x * 100)) + "," +
-              std::to_string(static_cast<int>(-linear_x * 100)) + ">";
-  }
+  // step 1. set parameters of the car (unit: m)
+  double width = 0.24;
 
-  if (angular_z > 0) {
-    command = "<" + std::to_string(static_cast<int>(linear_x * 100)) + ",0," +
-              std::to_string(static_cast<int>(angular_z * 100)) + ",0>";
-  } else if (angular_z < 0) {
-    command = "<" + std::to_string(static_cast<int>(linear_x * 100)) + ",0,0," +
-              std::to_string(static_cast<int>(-angular_z * 100)) + ">";
-  }
+  // step 2. calculate velocity of left wheels and right wheels
+  double v_left = linear - (angular * width) / 2;
+  double v_right = linear + (angular * width) / 2;
+
+  // step 3. set corresponding voltage
+  int voltage_left = floor(v_left / 0.5 * 255);
+  int voltage_right = floor(v_left / 0.5 * 255);
   return command;
 }
 
