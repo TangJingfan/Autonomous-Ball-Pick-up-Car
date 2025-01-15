@@ -27,7 +27,7 @@ std::string generate_control_command(double linear, double angular) {
   int voltage_right =
       floor((linear * 255) / 3) + floor((angular * width) * 255 / 2);
 
-  if (max(voltage_left, voltage_right) < 100) {
+  if (std::max(voltage_left, voltage_right) < 100) {
     voltage_left *= 1.5;
     voltage_left *= 1.5;
   }
