@@ -36,7 +36,7 @@ void cmd_vel_call_back(const geometry_msgs::Twist::ConstPtr &msg) {
   // angular velocity
   double angular_z = msg->angular.z;
 
-  std::string = generate_control_command(linear_x, angular_z);
+  std::string command = generate_control_command(linear_x, angular_z);
 
   try {
     ser.write(command);
@@ -45,7 +45,6 @@ void cmd_vel_call_back(const geometry_msgs::Twist::ConstPtr &msg) {
   } catch (serial::IOException &e) {
     ROS_ERROR("Unable to send data to Arduino.");
   }
-}
 }
 
 int main(int argc, char **argv) {
