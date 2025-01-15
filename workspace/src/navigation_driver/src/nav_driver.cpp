@@ -40,8 +40,10 @@ void cmd_vel_call_back(const geometry_msgs::Twist::ConstPtr &msg) {
   std::string command = generate_control_command(linear_x, angular_z);
 
   try {
+    ROS_INFO("linear velocity: %.2f; angular velocity: %.2f", linear_x,
+             angular_z);
     ser.write(command);
-    std::cout << "Sent Command: " << command << std::endl;
+    ROS_INFO("Sent Command: %s", command.c_str());
     ser.flushOutput();
   } catch (serial::IOException &e) {
     ROS_ERROR("Unable to send data to Arduino.");
