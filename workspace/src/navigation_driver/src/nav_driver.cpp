@@ -29,9 +29,9 @@ std::string generate_control_command(double linear, double angular) {
                       (angular * width) / (2 * 0.3) * 255));
 
   // step 4. set command
-  command = "<" + std::to_string(voltage_left) + "," +
-            std::to_string(voltage_right) + "," + std::to_string(voltage_left) +
-            "," + std::to_string(voltage_right) + ">";
+  command = "<" + std::to_string(voltage_right) + "," +
+            std::to_string(voltage_left) + "," + std::to_string(voltage_right) +
+            "," + std::to_string(voltage_left) + ">";
 
   return command;
 }
