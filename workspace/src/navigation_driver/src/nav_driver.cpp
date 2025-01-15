@@ -27,24 +27,25 @@ std::string generate_control_command(double linear_x, double angular_z) {
     command = "<" + std::to_string(static_cast<int>(linear_x * 100)) + ",0,0," +
               std::to_string(static_cast<int>(-angular_z * 100)) + ">";
   }
+}
 
-  // send info to arduino
-  void cmd_vel_call_back(const geometry_msgs::Twist::ConstPtr &msg) {
-    // linear velocity
-    double linear_x = msg->linear.x;
-    // angular velocity
-    double angular_z = msg->angular.z;
+// send info to arduino
+void cmd_vel_call_back(const geometry_msgs::Twist::ConstPtr &msg) {
+  // linear velocity
+  double linear_x = msg->linear.x;
+  // angular velocity
+  double angular_z = msg->angular.z;
 
-    std::string = generate_control_command(linear_x, angular_z);
+  std::string = generate_control_command(linear_x, angular_z);
 
-    try {
-      ser.write(command);
-      std::cout << "Sent Command: " << command << std::endl;
-      ser.flushOutput();
-    } catch (serial::IOException &e) {
-      ROS_ERROR("Unable to send data to Arduino.");
-    }
+  try {
+    ser.write(command);
+    std::cout << "Sent Command: " << command << std::endl;
+    ser.flushOutput();
+  } catch (serial::IOException &e) {
+    ROS_ERROR("Unable to send data to Arduino.");
   }
+}
 }
 
 int main(int argc, char **argv) {
