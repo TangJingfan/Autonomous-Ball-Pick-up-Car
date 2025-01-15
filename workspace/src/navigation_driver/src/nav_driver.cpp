@@ -17,12 +17,12 @@ std::string generate_control_command(double linear, double angular) {
   double factor = 255.0 / 3.0; // Scale factor for linear velocity
 
   // step 2. calculate voltage as double
-  double v_left = 70.0 - ((angular * width) * 255.0 / 2.0);
-  double v_right = 70.0 + ((angular * width) * 255.0 / 2.0);
+  double v_left = 60.0 - ((angular * width) * 255.0 / 1.35);
+  double v_right = 60.0 + ((angular * width) * 255.0 / 1.35);
 
   // step 3. apply minimum voltage or other constraints
-  int voltage_left = std::max(40, static_cast<int>(v_left));
-  int voltage_right = std::max(40, static_cast<int>(v_right));
+  int voltage_left=static_cast<int>(v_left);
+  int voltage_right=static_cast<int>(v_right);
 
   // step 4. set command
   command = "<" + std::to_string(voltage_left) + "," +
