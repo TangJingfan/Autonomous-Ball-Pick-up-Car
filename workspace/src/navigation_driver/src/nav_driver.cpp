@@ -63,8 +63,7 @@ void cmd_vel_call_back(const geometry_msgs::Twist::ConstPtr &msg) {
   // angular velocity
   double angular_z = msg->angular.z;
 
-  std::string command =
-      generate_control_command_rotation_first(linear_x, angular_z);
+  std::string command = generate_control_command(linear_x, angular_z);
 
   try {
     ROS_INFO("linear velocity: %.2f; angular velocity: %.2f", linear_x,
