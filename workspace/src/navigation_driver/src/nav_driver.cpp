@@ -27,6 +27,7 @@ std::string generate_control_command(double linear_x, double angular_z) {
     command = "<" + std::to_string(static_cast<int>(linear_x * 100)) + ",0,0," +
               std::to_string(static_cast<int>(-angular_z * 100)) + ">";
   }
+  return command;
 }
 
 // send info to arduino
