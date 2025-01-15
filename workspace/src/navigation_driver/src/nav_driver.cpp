@@ -27,9 +27,10 @@ std::string generate_control_command(double linear, double angular) {
   int voltage_right =
       floor((linear * 255) / 3) + floor((angular * width) * 255 / 2);
 
-  if (std::max(voltage_left, voltage_right) < 100) {
-    voltage_left *= 1.5;
-    voltage_left *= 1.5;
+  if (std::min(voltage_left, voltage_right) < 40 && std::max(voltage_left, voltage_right)< 100) {
+    int bonus = ceil(40.0/std::max(voltage_left, voltage_right));
+    voltage_left *= bonus;
+    voltage_right *= bonus;
   }
 
   // step 4. set command
