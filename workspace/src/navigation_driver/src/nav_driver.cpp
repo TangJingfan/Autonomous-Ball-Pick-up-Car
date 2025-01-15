@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
   }
 
   // subscribe /cmd_vel topic
-  ros::Subscriber sub = nh.subscribe("/cmd_vel", 10, cmd_vel_call_back);
+  ros::Subscriber sub = nh.subscribe("/cmd_vel", 18, cmd_vel_call_back);
 
   ros::spin();
 
