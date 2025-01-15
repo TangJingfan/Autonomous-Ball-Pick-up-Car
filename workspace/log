@@ -1,0 +1,6 @@
+[ERROR] [1736919211.456704643]: Extrapolation Error: Lookup would require extrapolation into the future.  Requested time 1736919211.426538217 but the latest data is at time 1736919211.425765189, when looking up transform from frame [odom] to frame [map]
+
+[ERROR] [1736919211.456817724]: Global Frame: odom Plan Frame size 74: map
+
+[ WARN] [1736919211.456882417]: Could not transform the global plan to the frame of the controller
+
