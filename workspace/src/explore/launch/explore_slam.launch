@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find explore)/launch/explore.launch" />
+
+  <include file="$(find rplidar_ros)/launch/slam_rplidar.launch" />
+</launch>
