@@ -17,3 +17,4 @@ build_isolated/
 build_isolated/*
 devel_isolated/
 devel_isolated/*
+.rosinstall
