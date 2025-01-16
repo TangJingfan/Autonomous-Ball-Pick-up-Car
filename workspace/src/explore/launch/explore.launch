@@ -3,4 +3,6 @@
     <param name="serial_port" value="/dev/arduino" />
     <param name="baudrate" value="115200" />
   </node>
+
+  <include file="$(find rplidar_ros)/launch/slam_rplidar.launch" />
 </launch>
