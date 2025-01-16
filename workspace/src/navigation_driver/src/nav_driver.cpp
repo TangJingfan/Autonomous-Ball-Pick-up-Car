@@ -17,8 +17,8 @@ std::string generate_control_command(double linear, double angular) {
   double factor = 255.0 / 3.0; // Scale factor for linear velocity
 
   // step 2. calculate voltage as double
-  double v_left = 60.0 - ((angular * width) * 255.0 / 1.35);
-  double v_right = 60.0 + ((angular * width) * 255.0 / 1.35);
+  double v_left = linear * factor - ((angular * width) * 255.0 / 1.35);
+  double v_right = linear * factor + ((angular * width) * 255.0 / 1.35);
 
   // step 3. apply minimum voltage or other constraints
   int voltage_left = static_cast<int>(v_left);
@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
   }
 
   // subscribe /cmd_vel topic
-  ros::Subscriber sub = nh.subscribe("/cmd_vel", 18, cmd_vel_call_back);
+  ros::Subscriber sub = nh.subscribe("/cmd_vel", 10, cmd_vel_call_back);
 
   ros::spin();
 
