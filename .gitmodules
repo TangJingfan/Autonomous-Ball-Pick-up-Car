@@ -10,3 +10,6 @@
 [submodule "workspace/src/lidar_loc"]
 	path = workspace/src/lidar_loc
 	url = git@github.com:TangJingfan/lidar_loc.git
+[submodule "cartographer_workspace/src/cartographer"]
+	path = cartographer_workspace/src/cartographer
+	url = git@github.com:TangJingfan/cartographer.git
