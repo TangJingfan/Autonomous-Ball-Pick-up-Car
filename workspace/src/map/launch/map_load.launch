@@ -1,4 +1,4 @@
 <launch>
-  <arg name="map" default="map.yaml"/>
+  <arg name="map" default="map.pbstream.yaml"/>
   <node pkg="map_server" name="map_server" type="map_server" args="$(find map)/map_info/$(arg map)"/>
 </launch>
