@@ -14,11 +14,11 @@ std::string generate_control_command(double linear, double angular) {
 
   // step 1. set parameters of the car (unit: m)
   double width = 0.24;
-  double factor = 200.0 / pow(0.36, 2);
+  double factor = 150.0 / pow(0.36, 2);
 
   // step 2. calculate voltage as double
-  double v_left = factor * pow(linear, 2) - ((angular * width) * 200.0 / 1.35);
-  double v_right = factor * pow(linear, 2) + ((angular * width) * 200.0 / 1.35);
+  double v_left = factor * pow(linear, 2) - ((angular * width) * 150.0 / 1.35);
+  double v_right = factor * pow(linear, 2) + ((angular * width) * 150.0 / 1.35);
 
   // step 3. apply minimum voltage or other constraints
   int voltage_left = static_cast<int>(v_left);
