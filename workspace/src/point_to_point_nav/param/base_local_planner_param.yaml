@@ -1,12 +1,12 @@
 TrajectoryPlannerROS:
  
 # Robot Configuration Parameters
-  max_vel_x: 1
-  min_vel_x: 0.3 
+  max_vel_x: 0.36
+  min_vel_x: 0.18 
  
-  max_vel_theta:  1 
-  min_vel_theta: -1
-  min_in_place_vel_theta: 0.2
+  max_vel_theta:  2.4 
+  min_vel_theta: -2.4
+  min_in_place_vel_theta: 0.83
  
   acc_lim_x: 1.0 
   acc_lim_y: 0.0 
