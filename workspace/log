@@ -1,6 +1,13 @@
-[ERROR] [1736919211.456704643]: Extrapolation Error: Lookup would require extrapolation into the future.  Requested time 1736919211.426538217 but the latest data is at time 1736919211.425765189, when looking up transform from frame [odom] to frame [map]
+[ WARN] [1737104087.913767194]: "odom" passed to lookupTransform argument target_frame does not exist. 
+[ WARN] [1737104087.930890672]: "odom" passed to lookupTransform argument target_frame does not exist. 
+[ WARN] [1737104087.964371004]: "odom" passed to lookupTransform argument target_frame does not exist. 
+[ WARN] [1737104087.997493208]: "odom" passed to lookupTransform argument target_frame does not exist. 
+[ WARN] [1737104088.030842653]: "odom" passed to lookupTransform argument target_frame does not exist. 
+[ WARN] [1737104088.064207254]: "odom" passed to lookupTransform argument target_frame does not exist. 
 
-[ERROR] [1736919211.456817724]: Global Frame: odom Plan Frame size 74: map
+[ WARN] [1737104088.197555709]: Lookup would require extrapolation into the past.  Requested time 1737104088.077081204 but the earliest data is at time 1737104088.089305926, when looking up transform from frame [laser] to frame [odom]
 
-[ WARN] [1736919211.456882417]: Could not transform the global plan to the frame of the controller
+[FATAL] [1737104089.278733612]: Failed to create the global_planner/GlobalPlanner planner, are you sure it is properly registered and that the containing library is built? Exception: According to the loaded plugin descriptions the class global_planner/GlobalPlanner with base class type nav_core::BaseGlobalPlanner does not exist. Declared types are 
+[move_base-7] process has died [pid 30977, exit code 1, cmd /opt/ros/melodic/lib/move_base/move_base __name:=move_base __log:=/home/nano/.ros/log/b045dea0-d4b0-11ef-b698-4c1d96c76492/move_base-7.log].
+log file: /home/nano/.ros/log/b045dea0-d4b0-11ef-b698-4c1d96c76492/move_base-7*.log
 
