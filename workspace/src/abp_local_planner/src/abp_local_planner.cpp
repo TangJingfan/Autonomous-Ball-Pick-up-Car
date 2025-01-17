@@ -13,8 +13,9 @@ ABPLocalPlanner::ABPLocalPlanner() {}
 ABPLocalPlanner::~ABPLocalPlanner() {}
 
 void ABPLocalPlanner::initialize(std::string name, tf2_ros::Buffer *tf,
-                                 costmap_2d::Costmap2DROS *costmap_ros){
-    ROS_INFO("Use customized local planner!")}
+                                 costmap_2d::Costmap2DROS *costmap_ros) {
+  ROS_INFO("Use customized local planner!");
+}
 
 std::vector<geometry_msgs::PoseStamped> global_plan_;
 
@@ -27,12 +28,12 @@ bool ABPLocalPlanner::setPlan(
 bool ABPLocalPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
   cv::Mat plan_image(1000, 1000, CV_8UC3, cv::Scalar(0, 0, 0));
   for (int i = 0; i < global_plan_.size(); i++) {
-    int cv_x = 500 - gloal_plan[i].pose.position.y * 100;
-    int cv_y = 500 - gloal_plan[i].pose.position.x * 100;
+    int cv_x = 500 - gloal_plan_[i].pose.position.y * 100;
+    int cv_y = 500 - gloal_plan_[i].pose.position.x * 100;
     cv::circle(plan_image, cv::Point(cv_x, cv_y), 1, cv::Scalar(255, 0, 255));
   }
 
-  cv::nameWindow("Plan");
+  cv::namedWindow("Plan");
   cv::imshow("Plan", plan_image);
   cv::waitKey(1);
   return true;
