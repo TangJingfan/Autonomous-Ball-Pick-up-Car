@@ -21,10 +21,6 @@ public:
   bool isGoalReached();
 };
 
-ABPLocalPlanner::ABPLocalPlanner(/* args */);
-
-ABPLocalPlanner::~ABPLocalPlanner();
-
 } // namespace abp_local_planner
 
 #endif
