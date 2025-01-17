@@ -42,5 +42,5 @@ void loop() {
 
   // make mecanum car run
   mecanum.setDutyCycle(speed[0], speed[1], speed[2], speed[3]);
-  delay(500);
+  delay(200);
 }
