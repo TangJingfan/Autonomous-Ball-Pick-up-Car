@@ -7,8 +7,8 @@
 namespace abp_planner {
 class ABPPlanner : public nav_core::BaseLocalPlanner {
 public:
-  ABBPlanner();
-  ~ABBPlanner();
+  ABPPlanner();
+  ~ABPPlanner();
 
   void initialize(std::string name, tf2_ros::Buffer *tf,
                   costmap_2d::Costmap2DROS *costmap_ros);

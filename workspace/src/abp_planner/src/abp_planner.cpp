@@ -4,8 +4,8 @@
 PLUGINLIB_EXPORT_CLASS(abp_planner::ABPPlanner, nav_core::BaseLocalPlanner)
 
 namespace abp_planner {
-ABPPlanner::ABBPlanner() { setlocale(LC_ALL.""); }
-ABPPlanner::~ABBPlanner() {}
+ABPPlanner::ABPPlanner() { setlocale(LC_ALL.""); }
+ABPPlanner::~ABPPlanner() {}
 
 void ABPPlanner::initialize(std::string name, tf2_ros::Buffer *tf,
                             costmap_2d::Costmap2DROS *costmap_ros) {
