@@ -1,5 +1,5 @@
 <library path="lib/libabp_planner" >
-  <class name="abp_planner/ABPPlanner" type="abp_planner::ABPPLanner" base_class_type="nav_core::BaseLocalPlanner">
+  <class name="abp_planner/ABPPlanner" type="abp_planner::ABPPlanner" base_class_type="nav_core::BaseLocalPlanner">
     <description>
       Local Planner.
     </description>
