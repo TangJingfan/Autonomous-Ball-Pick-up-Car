@@ -9,7 +9,7 @@ ABPPlanner::~ABPPlanner() {}
 
 void ABPPlanner::initialize(std::string name, tf2_ros::Buffer *tf,
                             costmap_2d::Costmap2DROS *costmap_ros) {
-  ROS_INFO("Use abp local planner");
+  ROS_WARN("Use abp local planner");
 }
 
 bool ABPPlanner::setPlan(const std::vector<geometry_msgs::PoseStamped> &plan) {
