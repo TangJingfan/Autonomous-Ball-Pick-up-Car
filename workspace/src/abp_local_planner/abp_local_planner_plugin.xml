@@ -1,7 +1,0 @@
-<library path="lib/libabp_local_planner">
-  <class name="abp_local_planner/ABPLocalPlanner" type="abp_local_planner::ABPLocalPlanner" base_class_type="nav_core::BaseLocalPlanner">
-    <description>
-      A re-written local path planner for better performance.
-    </description>
-  </class>
-</library>
