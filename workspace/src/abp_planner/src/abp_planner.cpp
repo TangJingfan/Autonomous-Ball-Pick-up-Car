@@ -7,18 +7,25 @@
 #include <tf/transform_listener.h>
 #include <vector>
 
+// when you want to write a plugin for the ROS system, this declaration is a
+// must tell the system what your plugin is and what will be replaced
 PLUGINLIB_EXPORT_CLASS(abp_planner::ABPPlanner, nav_core::BaseLocalPlanner)
 
 namespace abp_planner {
+// constructor and destructor
 ABPPlanner::ABPPlanner() { setlocale(LC_ALL, ""); }
 ABPPlanner::~ABPPlanner() {}
 
+// a transform listener for listening tf transform
 tf::TransformListener *tf_listener_;
+// an index to track global plan
 int target_index_;
 
 void ABPPlanner::initialize(std::string name, tf2_ros::Buffer *tf,
                             costmap_2d::Costmap2DROS *costmap_ros) {
+  // create an instance for tf_listener
   tf_listener_ = new tf::TransformListener();
+  // show we have started local planner
   ROS_WARN("Use abp local planner");
 }
 std::vector<geometry_msgs::PoseStamped> global_plan_;
