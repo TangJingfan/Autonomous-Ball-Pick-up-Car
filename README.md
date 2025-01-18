@@ -13,7 +13,7 @@ All structural files are stored in the `structure` directory. The naming convent
 
 ## Passive Laser SLAM
 
-Hector SLAM is used in this project. Follow the steps below to configure and run Laser SLAM:
+- Hector SLAM is used in this project. Follow the steps below to configure and run Laser SLAM:
 
 ```bash
 cd ~/Autonomous-Ball-Pick-up-Car/workspace
@@ -22,6 +22,28 @@ source /opt/ros/melodic/setup.bash
 source devel/setup.bash
 sudo chmod 666 /dev/laser
 roslaunch rplidar_ros rplidar_slam.launch
+```
+
+- Cartographer is also applied for better performance. When using cartographer, three terminal windows are needed.
+
+```bash
+# open terminal 1
+cd ~/Autonomous-Ball-Pick-up-Car/workspace
+catkin_make
+source /opt/ros/melodic/setup.bash
+source devel/setup.bash
+sudo chmod 666 /dev/laser
+roslaunch rplidar_ros rplidar.launch
+
+# open terminal 2
+cd ~/Autonomous-Ball-Pick-up-Car/cartographer_workspace
+./carto_slam.sh
+
+# open terminal 3
+cd ~/Autonomous-Ball-Pick-up-Car/cartographer_workspace
+./map_save.sh
+
+# Eventually, when map is successfully downloaded, quit all terminals.
 ```
 
 ## Active SLAM
