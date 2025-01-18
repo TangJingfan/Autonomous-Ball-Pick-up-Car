@@ -28,40 +28,55 @@ void ABPPlanner::initialize(std::string name, tf2_ros::Buffer *tf,
   // show we have started local planner
   ROS_WARN("Use abp local planner");
 }
+
+// a global variable to restore plan
 std::vector<geometry_msgs::PoseStamped> global_plan_;
 
 bool ABPPlanner::setPlan(const std::vector<geometry_msgs::PoseStamped> &plan) {
+  // store data
   global_plan_ = plan;
+  // restart tracking
   target_index_ = 0;
   return true;
 }
 
 bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
+  // a pose info to restore target status
   geometry_msgs::PoseStamped target_pose;
   for (int i = target_index_; i < global_plan_.size(); i++) {
+    // a pose info to restore current status
     geometry_msgs::PoseStamped pose_base;
+    // add time stamp to pose
     global_plan_[i].header.stamp = ros::Time(0);
+    // use function in tf listener to transform pose
     tf_listener_->transformPose("base_link", global_plan_[i], pose_base);
+    // calculate distance
     double dx = pose_base.pose.position.x;
     double dy = pose_base.pose.position.y;
     double dist = sqrt(dx * dx + dy * dy);
 
+    // within this distance, we consider the robot has achieved goal
     if (dist > 0.2) {
+      // update target info
       target_pose = pose_base;
       target_index = i;
       ROS_WARN("Next target: %d, distance: %.2f", target_index_, dist);
       break;
     }
 
+    // when reach goal, final process
     if (target_index_ = global_plan_.size() - 1) {
       target_pose = pose_base;
     }
   }
+
+  // update cmd_vel info
   // 1.5 and 5 are proportion constant.
   // they need to be adjusted to correspond real car.
   cmd_vel.linear.x = target_pose.pose.position.x * 1.5;
   cmd_vel.angular.z = target_pose.pose.position.y * 5;
 
+  // add an image to plot curve
   cv::Mat plan_image(600, 600, CV_8UC3, cv::Scalar(0, 0, 0));
   for (int i = 0; i < global_plan_.size(); i++) {
     geometry_msgs::PoseStamped pose_base;
