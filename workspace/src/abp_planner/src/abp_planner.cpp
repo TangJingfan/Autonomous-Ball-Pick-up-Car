@@ -65,7 +65,7 @@ bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
     }
 
     // when reach goal, final process
-    if (target_index_ = global_plan_.size() - 1) {
+    if (i = global_plan_.size() - 1) {
       target_pose = pose_base;
     }
   }
@@ -73,8 +73,8 @@ bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
   // update cmd_vel info
   // 1.5 and 5 are proportion constant.
   // they need to be adjusted to correspond real car.
-  cmd_vel.linear.x = target_pose.pose.position.x * 1.5;
-  cmd_vel.angular.z = target_pose.pose.position.y * 5;
+  cmd_vel.linear.x = target_pose.pose.position.x;
+  cmd_vel.angular.z = target_pose.pose.position.y;
 
   // add an image to plot curve
   cv::Mat plan_image(600, 600, CV_8UC3, cv::Scalar(0, 0, 0));
