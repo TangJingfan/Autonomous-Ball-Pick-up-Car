@@ -53,7 +53,7 @@ bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
     // calculate distance
     double dx = pose_base.pose.position.x;
     double dy = pose_base.pose.position.y;
-    double dist = sqrt(dx * dx + dy * dy);
+    double dist = std::sqrt(dx * dx + dy * dy);
 
     // within this distance, we consider the robot has achieved goal
     if (dist > 0.2) {
@@ -65,7 +65,7 @@ bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
     }
 
     // when reach goal, final process
-    if (i = global_plan_.size() - 1) {
+    if (i == global_plan_.size() - 1) {
       target_pose = pose_base;
     }
   }
