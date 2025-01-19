@@ -1,0 +1,22 @@
+nano@jetson:~/Autonomous-Ball-Pick-up-Car/cartographer_rkspace$ ./map_save.sh 
+status: 
+  code: 0
+  message: "Finished trajectory 0."
+status: 
+  code: 0
+  message: "State written to '/home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/map/map_info/map.pbstream'."
+I0119 11:59:02.726974 18508 pbstream_to_ros_map_main.cc:43] Loading submap slices from serialized data.
+I0119 11:59:02.728976 18508 pbstream_to_ros_map_main.cc:51] Generating combined map image from submap slices.
+F0119 11:59:02.729244 18508 image.cc:55] Check failed: cairo_image_surface_get_format(surface.get()) == kCairoFormat (-1 vs. 0) 
+*** Check failure stack trace: ***
+    @       0x7f84ba3128  google::LogMessage::Fail()
+    @       0x7f84ba4f98  google::LogMessage::SendToLog()
+    @       0x7f84ba2c90  google::LogMessage::Flush()
+    @       0x7f84ba583c  google::LogMessageFatal::~LogMessageFatal()
+    @       0x5574669f3c  (unknown)
+    @       0x5574668498  (unknown)
+    @       0x55746679c8  (unknown)
+    @       0x7f843ea720  __libc_start_main
+    @       0x5574668258  (unknown)
+./map_save.sh: line 6: 18508 Aborted                 (core dumped) rosrun cartographer_ros cartographer_pbstream_to_ros_map -map_filestem=/home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/map/map_info/map.pbstream -pbstream_filename=/home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/map/map_info/map.pbstream -resolution=0.05
+
