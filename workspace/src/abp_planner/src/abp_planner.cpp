@@ -113,7 +113,7 @@ bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
   // update cmd_vel info
   // 1.5 and 5 are proportion constant.
   // they need to be adjusted to correspond real car.
-  cmd_vel.linear.x = target_pose.pose.position.x * 1.5;
+  cmd_vel.linear.x = target_pose.pose.position.x * 1.2;
   cmd_vel.angular.z = target_pose.pose.position.y * 3;
 
   // add an image to plot curve
