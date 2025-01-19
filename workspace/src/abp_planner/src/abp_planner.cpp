@@ -59,7 +59,7 @@ bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
     if (dist > 0.2) {
       // update target info
       target_pose = pose_base;
-      target_index = i;
+      target_index_ = i;
       ROS_WARN("Next target: %d, distance: %.2f", target_index_, dist);
       break;
     }
@@ -87,9 +87,9 @@ bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
     cv::circle(plan_image, cv::Point(cv_x, cv_y), 1, cv::Scalar(255, 0, 255));
   }
   cv::circle(plan_image, cv::Point(300, 300), 15, cv::Scalar(0, 255, 0));
-  cv::line(plain_image, cv::Point(65, 300), cv::Point(510, 300),
+  cv::line(plan_image, cv::Point(65, 300), cv::Point(510, 300),
            cv::Scalar(0, 255, 0), 1);
-  cv::line(plain_image, cv::Point(300, 45), cv::Point(300, 555),
+  cv::line(plan_image, cv::Point(300, 45), cv::Point(300, 555),
            cv::Scalar(0, 255, 0), 1);
 
   cv::namedWindow("Plan");
