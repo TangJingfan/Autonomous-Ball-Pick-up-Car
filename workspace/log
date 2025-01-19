@@ -11,3 +11,8 @@
 [move_base-7] process has died [pid 30977, exit code 1, cmd /opt/ros/melodic/lib/move_base/move_base __name:=move_base __log:=/home/nano/.ros/log/b045dea0-d4b0-11ef-b698-4c1d96c76492/move_base-7.log].
 log file: /home/nano/.ros/log/b045dea0-d4b0-11ef-b698-4c1d96c76492/move_base-7*.log
 
+[ WARN] [1737270647.176147690]: Control loop missed its desired rate of 20.0000Hz... the loop actually took 0.0575 seconds
+
+
+[ WARN] [1737270630.396036430]: Lookup would require extrapolation into the past.  Requested time 1737270630.204447487 but the earliest data is at time 1737270630.328704746, when looking up transform from frame [laser] to frame [odom]
+
