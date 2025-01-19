@@ -20,6 +20,11 @@ ABPPlanner::~ABPPlanner() {}
 tf::TransformListener *tf_listener_;
 // an index to track global plan
 int target_index_;
+// a boolean variable to track pose
+// true means robot needs to change it yaw angle
+bool pose_adjusting_;
+// a boolean to track whether reach goal
+bool goal_reached_;
 
 void ABPPlanner::initialize(std::string name, tf2_ros::Buffer *tf,
                             costmap_2d::Costmap2DROS *costmap_ros) {
@@ -37,12 +42,47 @@ bool ABPPlanner::setPlan(const std::vector<geometry_msgs::PoseStamped> &plan) {
   global_plan_ = plan;
   // restart tracking
   target_index_ = 0;
+  // set pose adjusting as default false
+  pose_adjusting_ = false;
+  goal_reached_ = false;
   return true;
 }
 
 bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
   // a pose info to restore target status
   geometry_msgs::PoseStamped target_pose;
+
+  // final index
+  int final_index = global_plan_.size() - 1;
+  geometry_msgs::PoseStamped pose_final;
+  // add time stamp to pose
+  global_plan_[final_index].header.stamp = ros::Time(0);
+  // use function in tf listener to transform pose
+  tf_listener_->transformPose("base_link", global_plan_[final_index],
+                              pose_final);
+  if (pose_adjusting_ == false) {
+    double dx = pose_final.pose.position.x;
+    double dy = pose_final.pose.position.y;
+    double dist = std::sqrt(dx * dx + dy * dy);
+    if (dist < 0.05) {
+      pose_adjusting_ = true;
+    }
+  }
+
+  if (pose_adjusting_ == true) {
+    double final_yaw = tf::getYaw(pose_final.pose.orientation);
+    ROS_WARN("Final adjusting, final_yaw = %.2f", final_yaw);
+    cmd_vel.linear.x = pose_final.pose.position.x * 1.5;
+    cmd_vel.angular.z = final_yaw * 0.5;
+
+    if (abs(final_yaw) < 0.1) {
+      ROS_WARN("Reach Goal!");
+      cmd_vel.linear.x = 0;
+      cmd_vel.angular.z = 0;
+      goal_reached_ = true;
+    }
+  }
+
   for (int i = target_index_; i < global_plan_.size(); i++) {
     // a pose info to restore current status
     geometry_msgs::PoseStamped pose_base;
@@ -100,5 +140,5 @@ bool ABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
   return true;
 }
 
-bool ABPPlanner::isGoalReached() { return false; }
+bool ABPPlanner::isGoalReached() { return goal_reached_; }
 } // namespace abp_planner
