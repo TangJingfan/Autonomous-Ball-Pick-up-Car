@@ -66,7 +66,7 @@ bool LooseABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
     double dx = pose_final.pose.position.x;
     double dy = pose_final.pose.position.y;
     double dist = std::sqrt(dx * dx + dy * dy);
-    if (dist < 0.05) {
+    if (dist < 0.1) {
       pose_adjusting_ = true;
     }
   }
@@ -77,7 +77,7 @@ bool LooseABPPlanner::computeVelocityCommands(geometry_msgs::Twist &cmd_vel) {
     cmd_vel.linear.x = pose_final.pose.position.x * 1.5;
     cmd_vel.angular.z = final_yaw * 0.5;
 
-    if (abs(final_yaw) < 0.1) {
+    if (abs(final_yaw) < 0.5) {
       ROS_WARN("Reach Goal!");
       cmd_vel.linear.x = 0;
       cmd_vel.angular.z = 0;
