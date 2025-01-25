@@ -1,4 +1,5 @@
 <launch>
+  <env name="ROS_NAMESPACE" value="usb_cam"/>
   <include file="$(find camera_view)/launch/camera_use.launch" />
 
   <!-- Start the image_proc node -->
