@@ -8,6 +8,8 @@ project(ball_detection)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  cv_bridge
+  cv_pkg
   roscpp
 )
 
@@ -103,7 +105,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ball_detection
-#  CATKIN_DEPENDS roscpp
+#  CATKIN_DEPENDS cv_bridge cv_pkg roscpp
 #  DEPENDS system_lib
 )
 
