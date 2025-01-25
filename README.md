@@ -11,6 +11,14 @@ All structural files are stored in the `structure` directory. The naming convent
 - **Individual parts**: `<name>-<manufacture_method>_<date>.SLDPRT`
 - **Assembly file**: `picker_assembly_20241130.SLDASM`
 
+## Prerequisite
+
+Several binary `ROS` packages are need to install. Please use the following command.
+
+```bash
+sudo apt-get install ros-melodic-navigation ros-melodic-serial
+```
+
 ## Laser SLAM
 
 SLAM is based on RPLIDAR A1. When performing SLAM, ensure all related nodes are activated.
