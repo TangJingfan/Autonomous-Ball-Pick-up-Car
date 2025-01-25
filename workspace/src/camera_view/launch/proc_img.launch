@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find camera_view)/launch/camera_proc.launch" />
+
+  <node pkg="rqt_image_view" type="rqt_image_view" name="rqt_image_view" output="screen"/>
+</launch>

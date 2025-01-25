@@ -1,0 +1,10 @@
+<launch>
+  <include file="$(find camera_view)/launch/camera_img.launch" />
+
+  <!-- Start the image_proc node -->
+  <node pkg="image_proc" type="image_proc" name="image_proc_node" output="screen">
+    <!-- Specify input and output topics -->
+    <param name="input_topic" value="/usb_cam/image_raw"/>
+    <param name="output_topic" value="/usb_cam/image_proc"/>
+  </node>
+</launch>

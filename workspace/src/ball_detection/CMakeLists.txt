@@ -9,7 +9,6 @@ project(ball_detection)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
-  cv_pkg
   roscpp
 )
 
