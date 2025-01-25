@@ -16,7 +16,7 @@ All structural files are stored in the `structure` directory. The naming convent
 Several binary `ROS` packages are need to install. Please use the following command.
 
 ```bash
-sudo apt-get install ros-melodic-navigation ros-melodic-serial
+sudo apt-get install ros-melodic-navigation ros-melodic-serial ros-melodic-usb-cam
 ```
 
 ## Laser SLAM
