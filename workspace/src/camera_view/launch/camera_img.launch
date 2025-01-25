@@ -12,8 +12,5 @@
   <!-- Start the usb_cam node -->
   <node pkg="usb_cam" type="usb_cam_node" name="usb_cam" output="screen"/>
 
-  <!-- Start image_view for visualizing the camera feed -->
-  <node pkg="image_view" type="image_view" name="image_view" output="screen">
-    <param name="image" value="/usb_cam/image_raw"/>
-  </node>
+  <node pkg="rqt_image_view" type="rqt_image_view" name="rqt_image_view" output="screen"/>
 </launch>
