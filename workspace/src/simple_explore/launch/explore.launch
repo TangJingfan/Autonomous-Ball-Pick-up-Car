@@ -1,5 +1,5 @@
 <launch>
-  <node name="explore" pkg="explore" type="explore" output="screen">
+  <node name="simple_explore" pkg="simple_explore" type="simple_explore" output="screen">
     <param name="serial_port" value="/dev/arduino" />
     <param name="baudrate" value="115200" />
   </node>

@@ -71,7 +71,7 @@ void laser_call_back(const sensor_msgs::LaserScan::ConstPtr &msg) {
 
 int main(int argc, char **argv) {
   // init node
-  ros::init(argc, argv, "explore");
+  ros::init(argc, argv, "simple_explore");
 
   // init a node handle
   ros::NodeHandle nh;

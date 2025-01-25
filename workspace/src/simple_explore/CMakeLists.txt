@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(explore)
+project(simple_explore)
 
 # use c++11 standard to compile
 add_compile_options(-std=c++11)
