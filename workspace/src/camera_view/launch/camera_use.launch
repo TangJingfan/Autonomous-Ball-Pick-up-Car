@@ -9,6 +9,8 @@
   <!-- Set frames per second -->
   <param name="fps" value="30"/>
 
+  <param name="camera_info_url" value="file:///home/nano/Autonomous-Ball-Pick-up-Car/workspace/src/camera_view/param/ost.yaml"/>
+
   <!-- Start the usb_cam node -->
   <node pkg="usb_cam" type="usb_cam_node" name="usb_cam" output="screen"/>
 </launch>
