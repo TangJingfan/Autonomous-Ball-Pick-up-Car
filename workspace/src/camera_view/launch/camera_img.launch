@@ -1,0 +1,14 @@
+<launch>
+  <!-- Specify the video device path -->
+  <param name="video_device" value="/dev/camera"/>
+  
+  <!-- Set image resolution -->
+  <param name="image_width" value="640"/>
+  <param name="image_height" value="480"/>
+  
+  <!-- Set frames per second -->
+  <param name="fps" value="30"/>
+
+  <!-- Start the usb_cam node -->
+  <node pkg="usb_cam" type="usb_cam_node" name="usb_cam" output="screen"/>
+</launch>

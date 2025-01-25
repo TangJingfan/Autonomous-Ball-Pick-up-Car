@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>usb_camera_view</name>
+  <name>camera_view</name>
   <version>0.0.0</version>
-  <description>The usb_camera_view package</description>
+  <description>The camera_view package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
