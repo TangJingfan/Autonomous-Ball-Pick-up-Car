@@ -1,5 +1,5 @@
 <launch>
-  <include file="$(find camera_view)/launch/camera_img.launch" />
+  <include file="$(find camera_view)/launch/camera_use.launch" />
 
   <!-- Start the image_proc node -->
   <node pkg="image_proc" type="image_proc" name="image_proc_node" output="screen">
