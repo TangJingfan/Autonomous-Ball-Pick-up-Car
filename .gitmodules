@@ -25,3 +25,6 @@
 [submodule "workspace/src/m-explore"]
 	path = workspace/src/m-explore
 	url = git@github.com:TangJingfan/m-explore.git
+[submodule "workspace/src/imu_tools"]
+	path = workspace/src/imu_tools
+	url = git@github.com:TangJingfan/imu_tools.git

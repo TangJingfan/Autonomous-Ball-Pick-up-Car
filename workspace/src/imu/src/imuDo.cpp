@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
   ros::NodeHandle nh;
   ros::Subscriber imuSendCmd_sub =
       nh.subscribe("imuSendCmd", 1000, imuSendCmd_callback);
-  imuMsg_pub = nh.advertise<sensor_msgs::Imu>("imuData_raw", 20);
+  imuMsg_pub = nh.advertise<sensor_msgs::Imu>("imu_data_raw", 20);
 
   try { //设置串口属性，并打开串口
     com.setPort(comPort);
@@ -77,9 +77,11 @@ int main(int argc, char *argv[]) {
             com.available()) { // com.available(当串口没有缓存时，这个函数会一直等到有缓存才返回字符数
       com.read(tmpdata, data_size);
       for (int i = 0; i < data_size; i++) {
-        Cmd_GetPkt(tmpdata[i]); // 移植
-                                // 每收到1字节数据都填入该函数，当抓取到有效的数据包就会回调进入
-                                // Cmd_RxUnpack(U8 *buf, U8 DLen) 函数处理
+        Cmd_GetPkt(
+            tmpdata
+                [i]); // 移植
+                      // 每收到1字节数据都填入该函数，当抓取到有效的数据包就会回调进入
+                      // Cmd_RxUnpack(U8 *buf, U8 DLen) 函数处理
       }
     }
     //处理ROS的信息，比如订阅消息,并调用回调函数
