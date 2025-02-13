@@ -19,9 +19,6 @@
 [submodule "cartographer_workspace/abseil-cpp"]
 	path = cartographer_workspace/abseil-cpp
 	url = https://github.com/abseil/abseil-cpp.git
-[submodule "workspace/src/waterplus_map_tools"]
-	path = workspace/src/waterplus_map_tools
-	url = git@github.com:TangJingfan/waterplus_map_tools.git
 [submodule "workspace/src/m-explore"]
 	path = workspace/src/m-explore
 	url = git@github.com:TangJingfan/m-explore.git
