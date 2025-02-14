@@ -25,3 +25,6 @@
 [submodule "workspace/src/imu_tools"]
 	path = workspace/src/imu_tools
 	url = git@github.com:TangJingfan/imu_tools.git
+[submodule "workspace/src/robot_pose_ekf"]
+	path = workspace/src/robot_pose_ekf
+	url = git@github.com:udacity/robot_pose_ekf.git
